@@ -182,7 +182,6 @@ const articleSlice = createSlice({
     [addNewArticle.pending]: pending,
     [addNewArticle.rejected]: setError,
     [addNewArticle.fulfilled]: (state) => {
-      // state.tags = [];
       state.status = 'fulfilled';
       state.error = false;
     },
