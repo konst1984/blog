@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { fetchGetRequest, tagsArray } from '../utilites/helpers';
+import { fetchGetRequest } from '../utilites/helpers';
 
 export const fetchShortArticles = createAsyncThunk('articles/fetchShortArticles', fetchGetRequest);
 export const fetchSingleArticle = createAsyncThunk('articles/fetchFullArticle', fetchGetRequest);
@@ -21,7 +21,6 @@ export const deleteArticle = createAsyncThunk(
         throw new Error(`Can not delete article, request status ${response.statusText}`);
       }
       dispatch(delFulLArticle());
-      // dispatch(removeArticle({ id }));
     } catch (e) {
       return rejectWithValue(e.message);
     }
@@ -146,36 +145,10 @@ const articleSlice = createSlice({
       state.currentPage = action.payload.page;
       state.offsetArticles = action.payload.page * state.limitItemsOnPage;
     },
-    addTag(state) {
-      const newTag = tagsArray('');
-      state.tags = [...state.tags, newTag];
-    },
-    delTag(state, action) {
-      state.tags = state.tags.filter((tag) => tag.id !== action.payload.id);
-    },
-    changeTag(state, action) {
-      const newTag = {
-        id: action.payload.id,
-        text: action.payload.text,
-      };
-      const idx = state.tags.findIndex((item) => item.id === action.payload.id);
-      state.tags = [...state.tags.slice(0, idx), newTag, ...state.tags.slice(idx + 1)];
-    },
-    // setlogin(state) {
-    //   state.login = true;
-    // },
-    // setlogout(state) {
-    //   state.login = false;
-    // },
+
     delFulLArticle(state) {
       state.fullArticle = null;
     },
-    removeArticle(state, action) {
-      state.articles = state.articles.filter((article) => article.id !== action.payload.id);
-    },
-    // addArticle(state, action) {
-    //   // state.articles = state.articles.filter((article) => article.id !== action.payload.id);
-    // },
   },
   extraReducers: {
     [fetchShortArticles.pending]: (state) => {

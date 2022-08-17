@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import ReactMarkdown from 'react-markdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -47,35 +48,12 @@ const SingleArticle = () => {
         >
           <ActionButtons id={id} changeShow={changeShow} />
         </ShortArticle>
-        <div className={classes['article-body']}>{transformArticle.body}</div>
+        <div className={classes['article-body']}>
+          <ReactMarkdown>{transformArticle.body}</ReactMarkdown>
+        </div>
       </div>
     )) || <MessageAboutDeleting show={show} changeShow={changeShow} />
   );
-
-  // <div className={classes['full-article']}>
-  //   {status === 'rejected' ? (
-  //     <LoadErrorHandler />
-  //   ) : (
-  //     (transformArticle && (
-  //       <>
-  //         <ShortArticle
-  //           cls="non-filter"
-  //           id={''}
-  //           title={transformArticle.title}
-  //           tagList={transformArticle.tagList}
-  //           description={transformArticle.description}
-  //           favoritesCount={transformArticle.favoritesCount}
-  //           avatar={transformArticle.avatar}
-  //           author={transformArticle.author}
-  //           updatedAt={transformArticle.updatedAt}
-  //         >
-  //           <ActionButtons id={id} changeShow={changeShow} />
-  //         </ShortArticle>
-  //         <div className={classes['article-body']}>{transformArticle.body}</div>
-  //       </>
-  //     )) || <MessageAboutDeleting show={show} changeShow={changeShow} />
-  //   )}
-  // </div>
 };
 
 export default SingleArticle;

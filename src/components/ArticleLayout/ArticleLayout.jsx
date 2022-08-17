@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { tagsArray } from '../../utilites/helpers';
+import { tagsCreator } from '../../utilites/helpers';
 import SubmitButton from '../SubmitButton';
 
 import classes from './ArticleLayout.module.scss';
 import TagsBlock from './TagsBlock';
-import { useDispatch, useSelector } from 'react-redux';
 
 const ArticleLayout = ({
   tagsArr,
@@ -18,11 +17,8 @@ const ArticleLayout = ({
   tags,
   setTags,
 }) => {
-  // const tags = useSelector((state) => state.articles.tags);
-  // const dispatch = useDispatch();
-  //
   const addTag = () => {
-    const newTag = tagsArray('');
+    const newTag = tagsCreator('');
     setTags([...tags, newTag]);
   };
 

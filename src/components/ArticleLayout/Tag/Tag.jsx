@@ -28,7 +28,6 @@ const Tag = ({ id, text, deleteTag, changeTag, regTags }) => {
           type="text"
           placeholder={'Tag'}
           defaultValue={text}
-          // value={value}
           required
           {...regTags(id)}
           onChange={debounceFn}

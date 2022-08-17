@@ -37,7 +37,7 @@ export const createTag = () => {
   };
 };
 
-export const tagsArray = createTag();
+export const tagsCreator = createTag();
 export const fetchGetRequest = async function (url, { rejectWithValue }) {
   try {
     const response = await fetch(`${url}`);

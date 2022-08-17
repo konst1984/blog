@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { addNewArticle } from '../../../store/articleSlice';
 import ArticleLayout from '../../ArticleLayout';
 
 const CreateArticle = () => {
   const [tags, setTags] = useState([]);
-  // const tags = useSelector((state) => state.articles.tags);
   const dispatch = useDispatch();
 
-  const {
-    register,
-    formState: { errors },
-    reset,
-    handleSubmit,
-  } = useForm();
+  const { register, reset, handleSubmit } = useForm();
 
   let tagList = tags.length && tags.map((tag) => tag.text);
   const onSubmitForm = (data) => {

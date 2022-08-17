@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { editArticle } from '../../../store/articleSlice';
-import { tagsArray } from '../../../utilites/helpers';
+import { tagsCreator } from '../../../utilites/helpers';
 import ArticleLayout from '../../ArticleLayout';
 
 const EditArticlePage = () => {
@@ -14,12 +14,7 @@ const EditArticlePage = () => {
   const [tags, setTags] = useState([]);
   const dispatch = useDispatch();
 
-  const {
-    register,
-    formState: { errors },
-    reset,
-    handleSubmit,
-  } = useForm({
+  const { register, reset, handleSubmit } = useForm({
     defaultValues: {
       title: fullArticle?.title || '',
       description: fullArticle?.description || '',
@@ -29,7 +24,7 @@ const EditArticlePage = () => {
 
   useEffect(() => {
     if (fullArticle.tagList) {
-      const tagArray = fullArticle.tagList.map((tag) => tagsArray(tag));
+      const tagArray = fullArticle.tagList.map((tag) => tagsCreator(tag));
       setTags(tagArray);
     }
   }, [id]);
