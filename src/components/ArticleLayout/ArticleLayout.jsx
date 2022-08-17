@@ -1,60 +1,52 @@
-import React, { memo, useEffect, useState } from 'react';
+import React from 'react';
 
+import { tagsArray } from '../../utilites/helpers';
 import SubmitButton from '../SubmitButton';
 
 import classes from './ArticleLayout.module.scss';
 import TagsBlock from './TagsBlock';
-// import { useDispatch } from 'react-redux';
-// import { addNewArticle } from '../../store/articleSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ArticleLayout = ({
   tagsArr,
   titleForm,
-  body,
-  titleArticle,
-  description,
   regTitle,
   regDescribe,
   regText,
   submit,
-  setNewItem,
-  changeTag,
-  deleteTag,
-  tagValue,
-  addTag,
   regTags,
-  addValueTag,
+  tags,
+  setTags,
 }) => {
-  // const [titleArticleT, setTitleArticle] = useState('');
-  // const [descriptionT, setDescription] = useState('');
-  // const [bodyT, setBody] = useState('');
+  // const tags = useSelector((state) => state.articles.tags);
   // const dispatch = useDispatch();
   //
-  // useEffect(() => {
-  //   setTitleArticle(titleArticle);
-  //   setBody(body);
-  //   setDescription(description);
-  // }, [titleArticle, body, description]);
+  const addTag = () => {
+    const newTag = tagsArray('');
+    setTags([...tags, newTag]);
+  };
 
-  // const addArticle = () => {
-  //   dispatch(addNewArticle({}));
-  // };
+  const changeTag = (e, text, id) => {
+    const newTag = {
+      id: id,
+      text: text,
+    };
+    const idx = tags.findIndex((item) => item.id === id);
+    setTags([...tags.slice(0, idx), newTag, ...tags.slice(idx + 1)]);
+  };
+
+  const deleteTag = (id) => {
+    setTags((tags) => {
+      return tags.filter((item) => item.id !== id);
+    });
+  };
+
   return (
     <form className={classes.article} onSubmit={submit}>
       <h1 className={classes.article__title}>{titleForm}</h1>
       <label>
         Title
-        <input
-          className={classes.input}
-          type="text"
-          placeholder="Title"
-          // value={titleArticleT}
-          {...regTitle}
-          // onChange={(e) => {
-          //   setTitleArticle(e.target.value);
-          // }}
-          // onChange={(e) => setNewItem()}
-        />
+        <input className={classes.input} type="text" placeholder="Title" {...regTitle} />
       </label>
       <label>
         Short description
@@ -62,12 +54,7 @@ const ArticleLayout = ({
           className={classes.input}
           type="text"
           placeholder="Short description"
-          // value={descriptionT}
           {...regDescribe}
-          // onChange={(e) => {
-          //   setDescription(e.target.value);
-          // }}
-          // onChange={(e) => setNewItem()}
         />
       </label>
       <label>
@@ -78,12 +65,7 @@ const ArticleLayout = ({
           cols="30"
           rows="10"
           placeholder="Text"
-          // value={bodyT}
           {...regText}
-          // onChange={(e) => {
-          //   setBody(e.target.value);
-          // }}
-          // onChange={(e) => setNewItem()}
         />
       </label>
       <TagsBlock

@@ -34,25 +34,6 @@ const EditArticlePage = () => {
     }
   }, [id]);
 
-  const addTag = () => {
-    const newTag = tagsArray('');
-    setTags([...tags, newTag]);
-  };
-
-  const changeTag = (e, text, id) => {
-    const newTag = {
-      id: id,
-      text: text,
-    };
-    const idx = tags.findIndex((item) => item.id === id);
-    setTags([...tags.slice(0, idx), newTag, ...tags.slice(idx + 1)]);
-  };
-
-  const deleteTag = (id) => {
-    setTags((tags) => {
-      return tags.filter((item) => item.id !== id);
-    });
-  };
   const tagList = tags && tags.length ? tags.map((tag) => tag.text) : null;
   const onSubmitForm = (data) => {
     const obj = { ...data, tagList };
@@ -63,9 +44,6 @@ const EditArticlePage = () => {
   return (
     <ArticleLayout
       tagsArr={tags}
-      // titleArticle={fullArticle.title}
-      // description={fullArticle.description}
-      // body={fullArticle.body}
       regTitle={register('title', {
         required: true,
       })}
@@ -76,9 +54,8 @@ const EditArticlePage = () => {
         required: true,
       })}
       regTags={(id) => register(`Tag${id}`)}
-      changeTag={changeTag}
-      addTag={addTag}
-      deleteTag={deleteTag}
+      tags={tags}
+      setTags={setTags}
       titleForm={'Edit article'}
       submit={handleSubmit(onSubmitForm)}
     />

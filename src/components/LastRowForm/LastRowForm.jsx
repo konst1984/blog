@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
 
-import classes from './LastRowForm.module.scss';
 import { Link } from 'react-router-dom';
+
+import classes from './LastRowForm.module.scss';
 
 const LastRowForm = memo(({ text, link, nameLink }) => {
   return (

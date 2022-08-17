@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Button } from 'antd';
 import debounce from 'lodash.debounce';

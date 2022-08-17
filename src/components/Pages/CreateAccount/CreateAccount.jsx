@@ -5,14 +5,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import classes from '../../../index.module.scss';
-import { useAddArticleMutation, useAddNewUserMutation } from '../../../store/apiSlice';
 import { addNewUserFetch, setLogin } from '../../../store/userSlice';
 import Input from '../../Input';
 import LastRowForm from '../../LastRowForm';
 import SubmitButton from '../../SubmitButton';
 
 import Checkbox from './Checkbox';
-import clazz from './CreateAccount.module.scss';
 
 const CreateAccount = () => {
   const {
@@ -26,50 +24,9 @@ const CreateAccount = () => {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [newUser, setNewUser] = useState('');
-  const [newEmail, setNewEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [repPassword, setRepPassword] = useState('');
-
-  // useEffect(() => {
-  //   dispatch(addNewUserFetch());
-  // }, [dispatch]);
-
-  // const [addUser] = useAddNewUserMutation();
-  // const handleAddArticle = async () => {
-  //   if (addUser) {
-  //     await addUser({
-  //       user: {
-  //         username: newUser,
-  //         email: newEmail,
-  //         password: newPassword,
-  //       },
-  //     }).unwrap();
-  //     setNewUser('');
-  //     setNewEmail('');
-  //     setNewPassword('');
-  //     setRepPassword('');
-  //   }
-  // };
-  const addUsername = (val) => {
-    setNewUser(val);
-  };
-
-  const addEmail = (val) => {
-    setNewEmail(val);
-  };
-  const addPassword = (val) => {
-    setNewPassword(val);
-  };
-  const testPassword = (val) => {
-    setRepPassword(val);
-  };
 
   function onSubmit(data) {
-    console.log(data);
     dispatch(addNewUserFetch(data));
-    // handleAddArticle();
-    // dispatch(setLogin());
     navigate('/sign-in');
     reset();
   }
@@ -80,8 +37,6 @@ const CreateAccount = () => {
       <Input
         label={'Username'}
         placeholder={'Username'}
-        // value={newUser}
-        // onChangeFunc={addUsername}
         reg={register('username', {
           required: 'Required field',
           minLength: {
@@ -113,8 +68,6 @@ const CreateAccount = () => {
         label={'Password'}
         type={'password'}
         placeholder={'Password'}
-        // value={newPassword}
-        // onChangeFunc={addPassword}
         reg={register('password', {
           required: 'Your password needs to be at least 6 characters.',
           minLength: {

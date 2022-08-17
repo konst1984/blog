@@ -1,28 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import classes from './Input.module.scss';
 
 const Input = (props) => {
-  const { label, type, url, placeholder, reg, err, value, onChangeFunc } = props;
-  // const [valueInp, setValue] = useState('');
-  // useEffect(() => {
-  //   setValue(value);
-  // }, []);
-  // console.log(err.password && err.password.ref.value);
-  // console.log(err['password-repeat'] && err['password-repeat'].ref.value);
+  const { label, type, url, placeholder, reg, err } = props;
   return (
     <>
       <label>
         {label}
-        <input
-          className={classes.input}
-          type={type}
-          placeholder={placeholder}
-          src={url}
-          // value={value}
-          {...reg}
-          // onChange={(e) => onChangeFunc(e.target.value)}
-        />
+        <input className={classes.input} type={type} placeholder={placeholder} src={url} {...reg} />
         {reg.name === 'username' && err?.username && (
           <span className={classes['input-message']}>{err?.username?.message}</span>
         )}

@@ -21,7 +21,7 @@ export const addNewUserFetch = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        throw new Error('Can not register new user');
+        throw new Error(`Can not register new user, request status ${response.statusText}`);
       }
       const data = await response.json();
       return data;
@@ -34,7 +34,6 @@ export const addNewUserFetch = createAsyncThunk(
 export const fetchLogin = createAsyncThunk(
   'user/fetchLogin',
   async function ({ email, password }, { rejectWithValue, dispatch, getState }) {
-    localStorage.setItem('password', password);
     const url = getState().articles.url;
     try {
       const response = await fetch(`${url}/users/login`, {
@@ -50,10 +49,13 @@ export const fetchLogin = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        throw new Error('Can not register new user');
+        throw new Error(
+          `Can not login, check if the username and password are correct, request status ${response.statusText}`
+        );
       }
       const data = await response.json();
       localStorage.setItem('token', data.user.token);
+      localStorage.setItem('user', data.user.username);
       dispatch(setLogin());
       return data;
     } catch (e) {
@@ -71,7 +73,7 @@ export const getUser = createAsyncThunk(
     try {
       const response = await fetch(`${url}/profiles/${username}`);
       if (!response.ok) {
-        throw new Error('Can not register new user');
+        throw new Error(`Can not get current user, request status ${response.statusText}`);
       }
       const data = await response.json();
       console.log(data);
@@ -106,7 +108,7 @@ export const editProfile = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        throw new Error('Can not register new user');
+        throw new Error(`Can not edit profile, request status ${response.statusText}`);
       }
       const data = await response.json();
       localStorage.setItem('token', data.user.token);
@@ -125,7 +127,7 @@ const userSlice = createSlice({
     bio: '',
     email: '',
     image: localStorage.getItem('avatar'),
-    username: '',
+    username: localStorage.getItem('user'),
     status: '',
     error: false,
   },
@@ -176,7 +178,6 @@ const userSlice = createSlice({
       state.error = false;
     },
     [getUser.fulfilled]: (state) => {
-      // state.image = localStorage.getItem('avatar');
       state.status = 'fulfilled';
       state.error = false;
     },

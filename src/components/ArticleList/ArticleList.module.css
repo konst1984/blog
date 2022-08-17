@@ -6,7 +6,8 @@
 }
 
 .preloader {
-  padding: 20px;
+  padding: 10px;
+  height: 10px;
   text-align: center;
 }
 

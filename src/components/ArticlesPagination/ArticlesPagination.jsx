@@ -11,9 +11,7 @@ const ArticlesPagination = () => {
   const { articlesCount, currentPage } = useSelector((state) => state.articles);
   const dispatch = useDispatch();
   const totalPages = Math.floor(articlesCount);
-  // const totalPages = Math.floor(countPages);
-  console.log(articlesCount);
-  console.log(totalPages);
+
   const SwitchPageEvent = (page) => {
     window.scrollTo({
       top: 0,

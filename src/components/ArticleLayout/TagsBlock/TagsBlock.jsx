@@ -48,4 +48,4 @@ const TagsBlock = ({ tagsArr, addTag, changeTag, deleteTag, regTags }) => {
   );
 };
 
-export default React.memo(TagsBlock);
+export default TagsBlock;

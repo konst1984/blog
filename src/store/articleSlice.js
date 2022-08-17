@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { fetchGetRequest } from '../utilites/helpers';
+import { fetchGetRequest, tagsArray } from '../utilites/helpers';
 
 export const fetchShortArticles = createAsyncThunk('articles/fetchShortArticles', fetchGetRequest);
 export const fetchSingleArticle = createAsyncThunk('articles/fetchFullArticle', fetchGetRequest);
@@ -48,7 +48,7 @@ export const addNewArticle = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        throw new Error('Can not register new user');
+        throw new Error(`Can not add new article, request status ${response.statusText}`);
       }
       const data = await response.json();
 
@@ -139,8 +139,6 @@ const articleSlice = createSlice({
     offsetArticles: 0,
     currentPage: 1,
     fullArticle: null,
-    // login: false,
-    // slug: null,
     tags: [],
   },
   reducers: {
@@ -148,11 +146,20 @@ const articleSlice = createSlice({
       state.currentPage = action.payload.page;
       state.offsetArticles = action.payload.page * state.limitItemsOnPage;
     },
-    addTag(state, action) {
-      state.tags = [...state.tags, action.payload];
+    addTag(state) {
+      const newTag = tagsArray('');
+      state.tags = [...state.tags, newTag];
     },
     delTag(state, action) {
       state.tags = state.tags.filter((tag) => tag.id !== action.payload.id);
+    },
+    changeTag(state, action) {
+      const newTag = {
+        id: action.payload.id,
+        text: action.payload.text,
+      };
+      const idx = state.tags.findIndex((item) => item.id === action.payload.id);
+      state.tags = [...state.tags.slice(0, idx), newTag, ...state.tags.slice(idx + 1)];
     },
     // setlogin(state) {
     //   state.login = true;
@@ -166,9 +173,9 @@ const articleSlice = createSlice({
     removeArticle(state, action) {
       state.articles = state.articles.filter((article) => article.id !== action.payload.id);
     },
-    addArticle(state, action) {
-      // state.articles = state.articles.filter((article) => article.id !== action.payload.id);
-    },
+    // addArticle(state, action) {
+    //   // state.articles = state.articles.filter((article) => article.id !== action.payload.id);
+    // },
   },
   extraReducers: {
     [fetchShortArticles.pending]: (state) => {
@@ -188,6 +195,7 @@ const articleSlice = createSlice({
     },
     [fetchSingleArticle.fulfilled]: (state, action) => {
       state.fullArticle = action.payload.article;
+      state.tags = action.payload.article.tagList;
       state.status = 'fulfilled';
       state.error = false;
     },
@@ -200,6 +208,11 @@ const articleSlice = createSlice({
     [deleteArticle.rejected]: setError,
     [addNewArticle.pending]: pending,
     [addNewArticle.rejected]: setError,
+    [addNewArticle.fulfilled]: (state) => {
+      // state.tags = [];
+      state.status = 'fulfilled';
+      state.error = false;
+    },
     [editArticle.pending]: pending,
     [editArticle.rejected]: setError,
     [fetchLikeCounts.pending]: pending,
@@ -210,6 +223,6 @@ const articleSlice = createSlice({
     [fetchLikeCounts.rejected]: setError,
   },
 });
-export const { switchPage, removeArticle, delFulLArticle, delTag } = articleSlice.actions;
+export const { switchPage, addTag, delFulLArticle, delTag, changeTag } = articleSlice.actions;
 
 export default articleSlice.reducer;
