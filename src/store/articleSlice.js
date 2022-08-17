@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { fetchGetRequest } from '../utilites/helpers';
+import { fetchGetRequest, tagsCreator } from '../utilites/helpers';
 
 export const fetchShortArticles = createAsyncThunk('articles/fetchShortArticles', fetchGetRequest);
 export const fetchSingleArticle = createAsyncThunk('articles/fetchFullArticle', fetchGetRequest);
@@ -148,6 +148,23 @@ const articleSlice = createSlice({
 
     delFulLArticle(state) {
       state.fullArticle = null;
+    },
+    addTag(state) {
+      const newTag = tagsCreator('');
+      state.tags = [...state.tags, newTag];
+    },
+    changeTag(state, action) {
+      const newTag = {
+        id: action.payload.id,
+        text: action.payload.text,
+      };
+      const idx = state.tags.findIndex((item) => item.id === action.payload.id);
+      state.tags = [...state.tags.slice(0, idx), newTag, ...state.tags.slice(idx + 1)];
+    },
+    deleteTag(state, action) {
+      state.tags = state.tags((tags) => {
+        return tags.filter((item) => item.id !== action.payload);
+      });
     },
   },
   extraReducers: {
