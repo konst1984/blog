@@ -1,0 +1,50 @@
+.full-article {
+  position: relative;
+  height: auto;
+  margin: 26px auto;
+  width: 100%;
+  max-width: 938px;
+  background-color: #ffffff;
+  &.article {
+    filter: none;
+  }
+  .article-body {
+    padding: 0 14px 24px 16px;
+    background: white;
+  }
+  .buttons {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    .buttons__wrapper {
+      position: relative;
+      display: flex;
+      gap: 12px;
+      .del-article {
+        border-radius: 5px;
+      }
+      .edit-article {
+        padding: 4px 19px;
+        border: 1px solid #52c41a;
+        border-radius: 5px;
+        color: #52c41a;
+        transition: all 0.2s ease-out;
+        &:hover {
+          background: #52c41a;
+          color: white;
+        }
+        &:active {
+          background: #2b5e13;
+        }
+      }
+    }
+  }
+}
+
+.empty-article {
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  background: whitesmoke;
+  border-radius: 10px;
+}

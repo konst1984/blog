@@ -1,0 +1,123 @@
+:global {
+  .ant-btn.ant-btn-default.ant-btn-dangerous {
+    transition: background 0.2s ease-out;
+    &:focus-visible {
+      box-shadow: inset 0 0 0 2px #af0d0f;
+      outline: 2px solid #af0d0f;
+    }
+    &:hover {
+      background: #e54d4e;
+      color: #ffffff;
+    }
+    &:active {
+      background: #af0d0f;
+      color: #ffffff;
+    }
+  }
+  .ant-btn.ant-btn-primary.ant-btn-background-ghost {
+    position: absolute;
+    bottom: 5px;
+    left: 450px;
+    height: 40px;
+    color: #1890ff;
+    border-radius: 4px;
+    transition: background 0.2s ease-out;
+    &:hover {
+      background: #1890ff;
+      color: white;
+    }
+    &:focus-visible {
+      box-shadow: inset 0 0 0 2px #1890ff;
+    }
+
+    &:active {
+      background: #096dd9;
+      color: #ffffff;
+    }
+  }
+}
+
+.article {
+  display: grid;
+  gap: 21px;
+  max-width: 938px;
+  padding: 48px 32px;
+  margin: 26px auto;
+  background-color: white;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0 22px 106px rgba(0, 0, 0, 0.07), 0 9.19107px 44.2843px rgba(0, 0, 0, 0.0503198),
+    0 4.91399px 23.6765px rgba(0, 0, 0, 0.0417275), 0 2.75474px 13.2728px rgba(0, 0, 0, 0.035),
+    0 1.46302px 7.04911px rgba(0, 0, 0, 0.0282725), 0 0.608796px 2.93329px rgba(0, 0, 0, 0.0196802);
+  border-radius: 6px;
+
+  label {
+    width: 100%;
+    display: grid;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+
+    .input {
+      width: 100%;
+      height: 40px;
+      padding: 8px 12px;
+      border: 1px solid #bfbfbf;
+      border-radius: 5px;
+    }
+
+    .textarea {
+      width: 100%;
+      height: 168px;
+      padding: 8px 12px;
+      border: 1px solid #bfbfbf;
+      border-radius: 5px;
+    }
+
+    ::placeholder {
+      font-size: 16px;
+      line-height: 24px;
+      color: #bfbfbf;
+    }
+  }
+  &__title {
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  .tags {
+    display: grid;
+    position: relative;
+    padding: 5px 0;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 17px;
+
+    .tags-label {
+      margin: 0;
+    }
+
+    .tag {
+      width: 300px;
+      display: flex;
+      align-items: end;
+      gap: 17px;
+
+      input,
+      label {
+        width: 300px;
+      }
+    }
+
+    button {
+      padding: 8px 37px;
+      height: 40px;
+      border-radius: 4px;
+    }
+  }
+
+  & > button {
+    width: 320px;
+  }
+}

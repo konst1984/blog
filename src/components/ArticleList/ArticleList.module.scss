@@ -1,0 +1,10 @@
+.articles-list {
+  margin: 26px auto;
+  display: grid;
+  grid-auto-columns: minmax(300px, 934px);
+  gap: 26px;
+}
+.preloader {
+  padding: 20px;
+  text-align: center;
+}

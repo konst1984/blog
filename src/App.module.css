@@ -1,0 +1,15 @@
+.App {
+  width: 100%;
+  min-height: 100vh;
+  margin: auto;
+  padding-bottom: 26px;
+  background-color: #e5e5e5;
+}
+.App .main {
+  position: relative;
+  max-width: 958px;
+  padding: 26px 10px;
+  margin: auto;
+}
+
+/*# sourceMappingURL=App.module.css.map */

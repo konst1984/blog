@@ -1,0 +1,52 @@
+.full-article {
+  position: relative;
+  height: auto;
+  margin: 26px auto;
+  width: 100%;
+  max-width: 938px;
+  background-color: #ffffff;
+}
+.full-article.article {
+  filter: none;
+}
+.full-article .article-body {
+  padding: 0 14px 24px 16px;
+  background: white;
+}
+.full-article .buttons {
+  position: absolute;
+  right: 20px;
+  top: 80px;
+}
+.full-article .buttons .buttons__wrapper {
+  position: relative;
+  display: flex;
+  gap: 12px;
+}
+.full-article .buttons .buttons__wrapper .del-article {
+  border-radius: 5px;
+}
+.full-article .buttons .buttons__wrapper .edit-article {
+  padding: 4px 19px;
+  border: 1px solid #52c41a;
+  border-radius: 5px;
+  color: #52c41a;
+  transition: all 0.2s ease-out;
+}
+.full-article .buttons .buttons__wrapper .edit-article:hover {
+  background: #52c41a;
+  color: white;
+}
+.full-article .buttons .buttons__wrapper .edit-article:active {
+  background: #2b5e13;
+}
+
+.empty-article {
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  background: whitesmoke;
+  border-radius: 10px;
+}
+
+/*# sourceMappingURL=SingleArticle.module.css.map */

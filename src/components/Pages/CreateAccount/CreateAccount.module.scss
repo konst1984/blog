@@ -1,0 +1,31 @@
+.checkbox-label {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+  .checkbox {
+    position: absolute;
+    width: 0;
+    height: 0;
+    clip-path: circle(0%);
+  }
+  .checkbox-inner {
+    position: relative;
+    top: 3px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    outline: none;
+    border: 1px solid black;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .checkbox:checked + .checkbox-inner::after {
+    background: url('../../../../public/images/default.svg') center center / cover no-repeat;
+  }
+}
