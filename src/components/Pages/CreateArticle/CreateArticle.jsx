@@ -1,28 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { addNewArticle } from '../../../store/articleSlice';
+import { addCurrentTag, addNewArticle } from '../../../store/articleSlice';
 import ArticleLayout from '../../ArticleLayout';
 
 const CreateArticle = () => {
-  const [tags, setTags] = useState([]);
-  const dispatch = useDispatch();
+  const { tags } = useSelector((state) => state.articles);
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (tags.length) {
+      dispatch(addCurrentTag([]));
+    }
+  }, []);
   const { register, reset, handleSubmit } = useForm();
 
   let tagList = tags.length && tags.map((tag) => tag.text);
   const onSubmitForm = (data) => {
     const obj = { ...data, tagList };
     dispatch(addNewArticle(obj));
-    setTags([]);
+    // setTags([]);
     reset();
   };
 
   return (
     <ArticleLayout
-      tagsArr={tags}
       titleForm={'Create new article'}
       regTitle={register('title', {
         required: true,
@@ -35,8 +39,6 @@ const CreateArticle = () => {
       })}
       regTags={(id) => register(`Tag${id}`)}
       submit={handleSubmit(onSubmitForm)}
-      tags={tags}
-      setTags={setTags}
     />
   );
 };

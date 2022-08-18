@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from 'react';
 
 import { Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { addNewTag } from '../../../store/articleSlice';
+import { tagsCreator } from '../../../utilites/helpers';
 import classes from '../ArticleLayout.module.scss';
 import Tag from '../Tag';
 
-const TagsBlock = ({ tagsArr, addTag, changeTag, deleteTag, regTags }) => {
-  const [tags, setTags] = useState([]);
+const TagsBlock = ({ regTags }) => {
+  const { tags } = useSelector((state) => state.articles);
+  const dispatch = useDispatch();
+  const [tagsArr, setTagArr] = useState();
+
+  const handleAddTag = () => {
+    const newTag = tagsCreator('');
+    dispatch(addNewTag(newTag));
+  };
 
   useEffect(() => {
-    setTags(tagsArr);
-  }, [tagsArr]);
+    setTagArr(tags);
+  }, [tags]);
 
   const tagsList =
-    tags &&
-    tags.map((tag) => (
-      <Tag
-        key={tag.id}
-        id={tag.id}
-        text={tag.text}
-        changeTag={changeTag}
-        deleteTag={deleteTag}
-        regTags={regTags}
-      />
-    ));
+    tagsArr &&
+    tagsArr.map((tag) => <Tag key={tag.id} id={tag.id} text={tag.text} regTags={regTags} />);
 
   const ButtonAdd = ({ addTag, style }) => {
     return (
-      <Button type="primary" ghost onClick={() => addTag()} style={style}>
+      <Button type="primary" ghost onClick={handleAddTag} style={style}>
         Add tag
       </Button>
     );
@@ -35,14 +36,14 @@ const TagsBlock = ({ tagsArr, addTag, changeTag, deleteTag, regTags }) => {
 
   return (
     <div className={classes.tags}>
-      {tags && tagsList.length ? (
+      {tagsList && tagsList.length ? (
         <>
           <p className={classes['tags-label']}>Tag</p>
           {tagsList}
-          <ButtonAdd addTag={addTag} />
+          <ButtonAdd />
         </>
       ) : (
-        <ButtonAdd addTag={addTag} style={{ bottom: '-15px', left: '0' }} />
+        <ButtonAdd style={{ bottom: '-15px', left: '0' }} />
       )}
     </div>
   );

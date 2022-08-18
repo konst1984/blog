@@ -11,12 +11,11 @@ import ShortArticle from '../Pages/ShortArticle';
 import classes from './ArticleList.module.scss';
 
 const ArticleList = () => {
-  const { articles, offsetArticles, url } = useSelector((state) => state.articles);
+  const { articles, offsetArticles } = useSelector((state) => state.articles);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    const urlArticles = `${url}/articles/?offset=${offsetArticles}`;
-    dispatch(fetchShortArticles(urlArticles));
+    dispatch(fetchShortArticles());
   }, [offsetArticles]);
 
   const transformArticles = articles.map(articleGenerator).map((article) => {

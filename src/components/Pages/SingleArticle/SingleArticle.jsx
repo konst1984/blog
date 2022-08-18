@@ -18,14 +18,13 @@ const SingleArticle = () => {
   const [show, setShow] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { url, fullArticle, status } = useSelector((state) => state.articles);
+  const { fullArticle, status } = useSelector((state) => state.articles);
 
   const changeShow = (value) => setShow(value);
 
   useEffect(() => {
     if (id) {
-      const urlArticles = `${url}/articles/${id}`;
-      dispatch(fetchSingleArticle(urlArticles));
+      dispatch(fetchSingleArticle(id));
     }
   }, [dispatch, id]);
 

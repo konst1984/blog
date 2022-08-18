@@ -1,9 +1,40 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { fetchGetRequest, tagsCreator } from '../utilites/helpers';
+import { tagsCreator } from '../utilites/helpers';
 
-export const fetchShortArticles = createAsyncThunk('articles/fetchShortArticles', fetchGetRequest);
-export const fetchSingleArticle = createAsyncThunk('articles/fetchFullArticle', fetchGetRequest);
+export const fetchShortArticles = createAsyncThunk(
+  'articles/fetchShortArticles',
+  async function (_, { rejectWithValue, getState }) {
+    const url = getState().articles.url;
+    const offsetArticles = getState().articles.offsetArticles;
+    try {
+      const response = await fetch(`${url}/articles/?offset=${offsetArticles}`);
+      if (!response.ok) {
+        throw new Error('Data error');
+      }
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
+export const fetchSingleArticle = createAsyncThunk(
+  'articles/fetchSingleArticle',
+  async function (id, { rejectWithValue, getState }) {
+    const url = getState().articles.url;
+    try {
+      const response = await fetch(`${url}/articles/${id}`);
+      if (!response.ok) {
+        throw new Error('Data error');
+      }
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      return rejectWithValue(e.message);
+    }
+  }
+);
 
 export const deleteArticle = createAsyncThunk(
   'articles/deleteArticle',
@@ -51,7 +82,6 @@ export const addNewArticle = createAsyncThunk(
       }
       const data = await response.json();
 
-      console.log(data);
       return data;
     } catch (e) {
       return rejectWithValue(e.message);
@@ -81,7 +111,6 @@ export const editArticle = createAsyncThunk(
         }),
       });
       if (!response.ok) {
-        console.log(response);
         throw new Error(`Can not edit article, request status ${response.statusText}`);
       }
 
@@ -149,9 +178,11 @@ const articleSlice = createSlice({
     delFulLArticle(state) {
       state.fullArticle = null;
     },
-    addTag(state) {
-      const newTag = tagsCreator('');
-      state.tags = [...state.tags, newTag];
+    addNewTag(state, action) {
+      state.tags = [...state.tags, action.payload];
+    },
+    addCurrentTag(state, action) {
+      state.tags = action.payload;
     },
     changeTag(state, action) {
       const newTag = {
@@ -161,10 +192,8 @@ const articleSlice = createSlice({
       const idx = state.tags.findIndex((item) => item.id === action.payload.id);
       state.tags = [...state.tags.slice(0, idx), newTag, ...state.tags.slice(idx + 1)];
     },
-    deleteTag(state, action) {
-      state.tags = state.tags((tags) => {
-        return tags.filter((item) => item.id !== action.payload);
-      });
+    delTag(state, action) {
+      state.tags = state.tags.filter((item) => item.id !== action.payload);
     },
   },
   extraReducers: {
@@ -185,7 +214,7 @@ const articleSlice = createSlice({
     },
     [fetchSingleArticle.fulfilled]: (state, action) => {
       state.fullArticle = action.payload.article;
-      state.tags = action.payload.article.tagList;
+      state.tags = action.payload.article.tagList || [];
       state.status = 'fulfilled';
       state.error = false;
     },
@@ -199,6 +228,7 @@ const articleSlice = createSlice({
     [addNewArticle.pending]: pending,
     [addNewArticle.rejected]: setError,
     [addNewArticle.fulfilled]: (state) => {
+      state.tags = [];
       state.status = 'fulfilled';
       state.error = false;
     },
@@ -212,6 +242,7 @@ const articleSlice = createSlice({
     [fetchLikeCounts.rejected]: setError,
   },
 });
-export const { switchPage, addTag, delFulLArticle, delTag, changeTag } = articleSlice.actions;
+export const { switchPage, addNewTag, delFulLArticle, delTag, changeTag, addCurrentTag } =
+  articleSlice.actions;
 
 export default articleSlice.reducer;

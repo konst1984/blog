@@ -56,6 +56,7 @@ export const fetchLogin = createAsyncThunk(
       const data = await response.json();
       localStorage.setItem('token', data.user.token);
       localStorage.setItem('user', data.user.username);
+      localStorage.setItem('email', data.user.email);
       dispatch(setLogin());
       return data;
     } catch (e) {
@@ -69,14 +70,12 @@ export const getUser = createAsyncThunk(
   async function (_, { rejectWithValue, getState }) {
     const url = getState().articles.url;
     const username = getState().user.username;
-    console.log(username);
     try {
       const response = await fetch(`${url}/profiles/${username}`);
       if (!response.ok) {
         throw new Error(`Can not get current user, request status ${response.statusText}`);
       }
       const data = await response.json();
-      console.log(data);
       localStorage.setItem('avatar', data.profile.image);
       return data;
     } catch (e) {
@@ -88,7 +87,6 @@ export const getUser = createAsyncThunk(
 export const editProfile = createAsyncThunk(
   'user/editProfile',
   async function ({ username, email, password, image }, { rejectWithValue, getState }) {
-    console.log({ username, email, password, image });
     localStorage.setItem('avatar', image);
     const url = getState().articles.url;
     try {
@@ -112,7 +110,6 @@ export const editProfile = createAsyncThunk(
       }
       const data = await response.json();
       localStorage.setItem('token', data.user.token);
-      console.log(data);
       return data;
     } catch (e) {
       return rejectWithValue(e.message);
@@ -149,7 +146,6 @@ const userSlice = createSlice({
       state.error = false;
     },
     [addNewUserFetch.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.status = 'fulfilled';
       state.error = false;
     },

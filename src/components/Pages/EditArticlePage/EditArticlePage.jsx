@@ -4,14 +4,15 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { editArticle } from '../../../store/articleSlice';
+import { addCurrentTag, editArticle } from '../../../store/articleSlice';
 import { tagsCreator } from '../../../utilites/helpers';
 import ArticleLayout from '../../ArticleLayout';
 
 const EditArticlePage = () => {
   const { id } = useParams();
   const { fullArticle } = useSelector((state) => state.articles);
-  const [tags, setTags] = useState([]);
+
+  const { tags } = useSelector((state) => state.articles);
   const dispatch = useDispatch();
 
   const { register, reset, handleSubmit } = useForm({
@@ -23,13 +24,13 @@ const EditArticlePage = () => {
   });
 
   useEffect(() => {
-    if (fullArticle.tagList) {
+    if (fullArticle && fullArticle.tagList) {
       const tagArray = fullArticle.tagList.map((tag) => tagsCreator(tag));
-      setTags(tagArray);
+      dispatch(addCurrentTag(tagArray));
     }
-  }, [id]);
+  }, [id, fullArticle]);
 
-  const tagList = tags && tags.length ? tags.map((tag) => tag.text) : null;
+  const tagList = tags && tags.length ? tags.map((tag) => tag.text) : [];
   const onSubmitForm = (data) => {
     const obj = { ...data, tagList };
     dispatch(editArticle(obj));
@@ -38,7 +39,6 @@ const EditArticlePage = () => {
 
   return (
     <ArticleLayout
-      tagsArr={tags}
       regTitle={register('title', {
         required: true,
       })}
@@ -49,8 +49,6 @@ const EditArticlePage = () => {
         required: true,
       })}
       regTags={(id) => register(`Tag${id}`)}
-      tags={tags}
-      setTags={setTags}
       titleForm={'Edit article'}
       submit={handleSubmit(onSubmitForm)}
     />

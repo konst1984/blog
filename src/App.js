@@ -14,16 +14,14 @@ import EditArticlePage from './components/Pages/EditArticlePage';
 import EditProfile from './components/Pages/EditProfile';
 import LoginPage from './components/Pages/LoginPage';
 import SingleArticle from './components/Pages/SingleArticle';
-import { fetchLogin, setLogin } from './store/userSlice';
+import { setLogin } from './store/userSlice';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     const loggedInUser = localStorage.getItem('user');
-    console.log(loggedInUser);
     if (loggedInUser) {
       dispatch(setLogin());
-      dispatch(fetchLogin());
     }
   }, []);
   return (
