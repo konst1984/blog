@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchLikeCounts } from '../../../store/articleSlice';
-import classes from '../../Pages/ShortArticle/ShortArticle.module.scss';
+import { fetchLikeCounts } from '../../../../store/articleSlice';
+import classes from '../ShortArticle.module.scss';
 
 const ButtonLike = ({ favoritesCount, id }) => {
   const [like, setLike] = useState(0);

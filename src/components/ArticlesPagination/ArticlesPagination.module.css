@@ -2,33 +2,33 @@
   text-align: center;
   z-index: 10;
 }
-
-:global .ant-pagination-item {
+.pagination :global .ant-pagination-item {
   background-color: #e5e5e5;
   border-color: transparent;
 }
-:global .ant-pagination-prev .ant-pagination-item-link,
-:global .ant-pagination-next .ant-pagination-item-link {
-  border-radius: 50%;
+.pagination :global .ant-pagination-item:hover {
+  background-color: white;
+  color: #096dd9;
 }
-:global button.ant-pagination-item-link:active {
+.pagination :global button.ant-pagination-item-link:active {
   background-color: #ffffff;
 }
-:global .ant-pagination-disabled .ant-pagination-item-link,
-:global .ant-pagination-disabled:hover .ant-pagination-item-link,
-:global .ant-pagination-prev .ant-pagination-item-link,
-:global .ant-pagination-next .ant-pagination-item-link {
+.pagination :global button.ant-pagination-item-link:hover {
+  background-color: white;
+  color: #096dd9;
+}
+.pagination :global .ant-pagination-disabled .ant-pagination-item-link,
+.pagination :global .ant-pagination-disabled:hover .ant-pagination-item-link,
+.pagination :global .ant-pagination-prev .ant-pagination-item-link,
+.pagination :global .ant-pagination-next .ant-pagination-item-link {
   background-color: #e5e5e5;
   border-color: transparent;
 }
-:global .ant-pagination-item-active {
+.pagination :global .ant-pagination-item-active {
   background: #1890ff;
   border-radius: 4px;
 }
-:global .ant-pagination-item-active a {
-  color: #fff;
-}
-:global .ant-pagination-item-active:hover a {
+.pagination :global .ant-pagination-item-active a {
   color: #fff;
 }
 

@@ -2,18 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 import { format } from 'date-fns';
 import ReactMarkdown from 'react-markdown';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import ButtonLike from '../../ArticleList/ButtonLike';
-
+import ButtonLike from './ButtonLike';
 import classes from './ShortArticle.module.scss';
 
 const ShortArticle = (props) => {
   if (props) {
     const { title, tagList, description, favoritesCount, avatar, author, date, cls, id, children } =
       props;
-
     return (
       <div className={`${classes.article} ${classes[cls]}`}>
         <div className={classes['article__header']}>

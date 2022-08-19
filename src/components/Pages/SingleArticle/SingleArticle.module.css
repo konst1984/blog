@@ -13,6 +13,9 @@
   padding: 0 14px 24px 16px;
   background: white;
 }
+.full-article .article-body p {
+  overflow: hidden;
+}
 .full-article .buttons {
   position: absolute;
   right: 20px;
@@ -39,14 +42,6 @@
 }
 .full-article .buttons .buttons__wrapper .edit-article:active {
   background: #2b5e13;
-}
-
-.empty-article {
-  padding: 15px;
-  text-align: center;
-  font-size: 24px;
-  background: whitesmoke;
-  border-radius: 10px;
 }
 
 /*# sourceMappingURL=SingleArticle.module.css.map */

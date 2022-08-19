@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import classes from './DeletionConfirm.module.scss';
-import { useDispatch } from 'react-redux';
-import { deleteArticle } from '../../../../store/articleSlice';
+import React from 'react';
 
-const DeletionConfirm = ({ hiddenConfirm, visible, id, changeShow }) => {
+import { useDispatch } from 'react-redux';
+
+import { deleteArticle, showMessage } from '../../../../store/articleSlice';
+
+import classes from './DeleteArticle.module.scss';
+
+const DeleteArticle = ({ hiddenConfirm, visible, id }) => {
   const dispatch = useDispatch();
   return (
     <>
@@ -26,7 +29,7 @@ const DeletionConfirm = ({ hiddenConfirm, visible, id, changeShow }) => {
               className={`${classes['confirm-answer']} ${classes['confirm-answer_yes']}`}
               onClick={() => {
                 dispatch(deleteArticle(id));
-                changeShow(true);
+                dispatch(showMessage(true));
               }}
             >
               Yes
@@ -38,4 +41,4 @@ const DeletionConfirm = ({ hiddenConfirm, visible, id, changeShow }) => {
   );
 };
 
-export default DeletionConfirm;
+export default DeleteArticle;

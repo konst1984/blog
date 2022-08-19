@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addCurrentTag, addNewArticle } from '../../../store/articleSlice';
+import { addCurrentTag, addNewArticle, showMessage } from '../../../store/articleSlice';
 import ArticleLayout from '../../ArticleLayout';
+import EventMessage from '../../SideComponents/EventMessage';
+import LoadErrorHandler from '../../SideComponents/LoadErrorComponent';
 
 const CreateArticle = () => {
-  const { tags } = useSelector((state) => state.articles);
+  const { tags, eventMessage, status, error, fullArticle } = useSelector((state) => state.articles);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,15 +19,24 @@ const CreateArticle = () => {
   }, []);
   const { register, reset, handleSubmit } = useForm();
 
-  let tagList = tags.length && tags.map((tag) => tag.text);
+  let tagList = tags.length ? tags.map((tag) => tag.text) : [];
   const onSubmitForm = (data) => {
     const obj = { ...data, tagList };
     dispatch(addNewArticle(obj));
-    // setTags([]);
+    dispatch(showMessage(true));
     reset();
   };
 
-  return (
+  if (status === 'rejected') {
+    return <LoadErrorHandler link={'/new-article'} status={status} error={error} />;
+  }
+  return eventMessage && status === 'fulfilled' && !fullArticle ? (
+    <EventMessage
+      text={'Your article has been published'}
+      eventMessage={eventMessage}
+      link={'/article'}
+    />
+  ) : (
     <ArticleLayout
       titleForm={'Create new article'}
       regTitle={register('title', {

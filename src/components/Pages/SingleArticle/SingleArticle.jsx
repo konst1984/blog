@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import ReactMarkdown from 'react-markdown';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,21 +6,18 @@ import { useParams } from 'react-router-dom';
 
 import { fetchSingleArticle } from '../../../store/articleSlice';
 import { articleGenerator } from '../../../utilites/helpers';
-import LoadErrorHandler from '../../LoadErrorHandler';
+import EventMessage from '../../SideComponents/EventMessage';
+import LoadErrorHandler from '../../SideComponents/LoadErrorComponent';
 import ShortArticle from '../ShortArticle';
 
 import ActionButtons from './ActionButtons';
-// import DeletionConfirm from './DeletionConfirm';
-import MessageAboutDeleting from './MessageAboutDeleting';
 import classes from './SingleArticle.module.scss';
 
 const SingleArticle = () => {
-  const [show, setShow] = useState(false);
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { fullArticle, status } = useSelector((state) => state.articles);
-
-  const changeShow = (value) => setShow(value);
+  const { fullArticle, status, error } = useSelector((state) => state.articles);
+  const { eventMessage } = useSelector((state) => state.articles);
 
   useEffect(() => {
     if (id) {
@@ -30,7 +27,7 @@ const SingleArticle = () => {
 
   const transformArticle = fullArticle && articleGenerator(fullArticle);
   return status === 'rejected' ? (
-    <LoadErrorHandler />
+    <LoadErrorHandler link={'/article'} status={status} error={error} />
   ) : (
     (transformArticle && (
       <div className={classes['full-article']}>
@@ -45,13 +42,13 @@ const SingleArticle = () => {
           author={transformArticle.author}
           updatedAt={transformArticle.updatedAt}
         >
-          <ActionButtons id={id} changeShow={changeShow} />
+          <ActionButtons id={id} />
         </ShortArticle>
         <div className={classes['article-body']}>
           <ReactMarkdown>{transformArticle.body}</ReactMarkdown>
         </div>
       </div>
-    )) || <MessageAboutDeleting show={show} changeShow={changeShow} />
+    )) || <EventMessage text={'Article deleted'} eventMessage={eventMessage} link={'/article'} />
   );
 };
 

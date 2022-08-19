@@ -50,7 +50,8 @@ export const fetchLogin = createAsyncThunk(
       });
       if (!response.ok) {
         throw new Error(
-          `Can not login, check if the username and password are correct, request status ${response.statusText}`
+          `Unable to login, check the correctness of 
+          the request address and input data, request status ${response.statusText}`
         );
       }
       const data = await response.json();
@@ -117,6 +118,15 @@ export const editProfile = createAsyncThunk(
   }
 );
 
+const setError = (state, action) => {
+  state.status = 'rejected';
+  state.error = action.payload;
+};
+const setPending = (state) => {
+  state.status = 'loading';
+  state.error = false;
+};
+
 const userSlice = createSlice({
   name: 'user',
   initialState: {
@@ -127,6 +137,7 @@ const userSlice = createSlice({
     username: localStorage.getItem('user'),
     status: '',
     error: false,
+    eventMessage: true,
   },
   reducers: {
     setLogin(state) {
@@ -139,20 +150,17 @@ const userSlice = createSlice({
       state.username = '';
       state.bio = '';
     },
+    showMessageUser(state, action) {
+      state.eventMessage = action.payload;
+    },
   },
   extraReducers: {
-    [addNewUserFetch.pending]: (state) => {
-      state.status = 'loading';
-      state.error = false;
-    },
+    [addNewUserFetch.pending]: setPending,
     [addNewUserFetch.fulfilled]: (state, action) => {
       state.status = 'fulfilled';
       state.error = false;
     },
-    [addNewUserFetch.rejected]: (state) => {
-      state.status = 'rejected';
-      state.error = true;
-    },
+    [addNewUserFetch.rejected]: setError,
     [fetchLogin.pending]: (state) => {
       state.status = 'loading';
       state.error = false;
@@ -165,26 +173,14 @@ const userSlice = createSlice({
       state.status = 'fulfilled';
       state.error = false;
     },
-    [fetchLogin.rejected]: (state) => {
-      state.status = 'rejected';
-      state.error = true;
-    },
-    [getUser.pending]: (state) => {
-      state.status = 'loading';
-      state.error = false;
-    },
+    [fetchLogin.rejected]: setError,
+    [getUser.pending]: setPending,
     [getUser.fulfilled]: (state) => {
       state.status = 'fulfilled';
       state.error = false;
     },
-    [getUser.rejected]: (state) => {
-      state.status = 'rejected';
-      state.error = true;
-    },
-    [editProfile.pending]: (state) => {
-      state.status = 'loading';
-      state.error = false;
-    },
+    [getUser.rejected]: setError,
+    [editProfile.pending]: setPending,
     [editProfile.fulfilled]: (state, action) => {
       state.email = action.payload.user.email;
       state.image = action.payload.user.image;
@@ -192,10 +188,7 @@ const userSlice = createSlice({
       state.status = 'fulfilled';
       state.error = false;
     },
-    [editProfile.rejected]: (state) => {
-      state.status = 'rejected';
-      state.error = true;
-    },
+    [editProfile.rejected]: setError,
   },
 });
 export const { setLogin, setLogout } = userSlice.actions;

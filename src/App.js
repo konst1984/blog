@@ -19,7 +19,7 @@ import { setLogin } from './store/userSlice';
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('user');
+    const loggedInUser = localStorage.getItem('token');
     if (loggedInUser) {
       dispatch(setLogin());
     }

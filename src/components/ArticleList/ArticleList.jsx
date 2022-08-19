@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchShortArticles } from '../../store/articleSlice';
 import { articleGenerator } from '../../utilites/helpers';
 import ArticlesPagination from '../ArticlesPagination';
-import LoadErrorHandler from '../LoadErrorHandler';
+import LoadErrorHandler from '../SideComponents/LoadErrorComponent';
 import ShortArticle from '../Pages/ShortArticle';
 
 import classes from './ArticleList.module.scss';
 
 const ArticleList = () => {
-  const { articles, offsetArticles } = useSelector((state) => state.articles);
+  const { articles, offsetArticles, error, status } = useSelector((state) => state.articles);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,7 +26,9 @@ const ArticleList = () => {
 
   return (
     <>
-      <LoadErrorHandler />
+      <div style={{ height: '32px' }}>
+        <LoadErrorHandler />
+      </div>
       <div className={classes['articles-list']}>{articles ? transformArticles : null}</div>
       <ArticlesPagination />
     </>

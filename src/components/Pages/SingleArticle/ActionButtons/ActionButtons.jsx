@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import DeletionConfirm from '../DeletionConfirm';
+import DeleteArticle from '../DeleteArticle';
 import classes from '../SingleArticle.module.scss';
 
 const ActionButtons = ({ id, changeShow }) => {
@@ -33,7 +33,7 @@ const ActionButtons = ({ id, changeShow }) => {
             <Link to={`/articles/${id}/edit`} className={classes['edit-article']}>
               Edit
             </Link>
-            <DeletionConfirm
+            <DeleteArticle
               visible={visible}
               hiddenConfirm={hiddenConfirm}
               id={id}

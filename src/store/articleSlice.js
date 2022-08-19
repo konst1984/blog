@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { tagsCreator } from '../utilites/helpers';
-
 export const fetchShortArticles = createAsyncThunk(
   'articles/fetchShortArticles',
   async function (_, { rejectWithValue, getState }) {
@@ -10,7 +8,7 @@ export const fetchShortArticles = createAsyncThunk(
     try {
       const response = await fetch(`${url}/articles/?offset=${offsetArticles}`);
       if (!response.ok) {
-        throw new Error('Data error');
+        throw new Error(`Can not find articles list, request status ${response.statusText}`);
       }
       const data = await response.json();
       return data;
@@ -26,7 +24,9 @@ export const fetchSingleArticle = createAsyncThunk(
     try {
       const response = await fetch(`${url}/articles/${id}`);
       if (!response.ok) {
-        throw new Error('Data error');
+        throw new Error(
+          `The full version of the article was not found , request status ${response.statusText}`
+        );
       }
       const data = await response.json();
       return data;
@@ -60,9 +60,10 @@ export const deleteArticle = createAsyncThunk(
 
 export const addNewArticle = createAsyncThunk(
   'articles/addNewArticle',
-  async function ({ title, description, body, tagList }, { rejectWithValue }) {
+  async function ({ title, description, body, tagList }, { rejectWithValue, getState }) {
+    const url = getState().articles.url;
     try {
-      const response = await fetch('https://blog.kata.academy/api/articles', {
+      const response = await fetch(`${url}/articles`, {
         method: 'POST',
         headers: {
           Authorization: `Token ${localStorage.getItem('token')}`,
@@ -168,6 +169,7 @@ const articleSlice = createSlice({
     currentPage: 1,
     fullArticle: null,
     tags: [],
+    eventMessage: false,
   },
   reducers: {
     switchPage(state, action) {
@@ -194,6 +196,9 @@ const articleSlice = createSlice({
     },
     delTag(state, action) {
       state.tags = state.tags.filter((item) => item.id !== action.payload);
+    },
+    showMessage(state, action) {
+      state.eventMessage = action.payload;
     },
   },
   extraReducers: {
@@ -242,7 +247,14 @@ const articleSlice = createSlice({
     [fetchLikeCounts.rejected]: setError,
   },
 });
-export const { switchPage, addNewTag, delFulLArticle, delTag, changeTag, addCurrentTag } =
-  articleSlice.actions;
+export const {
+  switchPage,
+  addNewTag,
+  delFulLArticle,
+  delTag,
+  changeTag,
+  addCurrentTag,
+  showMessage,
+} = articleSlice.actions;
 
 export default articleSlice.reducer;
