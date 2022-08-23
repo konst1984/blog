@@ -31,11 +31,7 @@ const CreateArticle = () => {
     return <LoadErrorHandler link={'/new-article'} status={status} error={error} />;
   }
   return eventMessage && status === 'fulfilled' && !fullArticle ? (
-    <EventMessage
-      text={'Your article has been published'}
-      eventMessage={eventMessage}
-      link={'/article'}
-    />
+    <EventMessage text={'Your article has been published'} eventMessage={eventMessage} link={'/article'} />
   ) : (
     <ArticleLayout
       titleForm={'Create new article'}

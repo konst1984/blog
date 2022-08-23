@@ -34,12 +34,7 @@ const ActionButtons = ({ id, changeShow }) => {
             <Link to={`/articles/${id}/edit`} className={classes['edit-article']}>
               Edit
             </Link>
-            <DeleteArticle
-              visible={visible}
-              hiddenConfirm={hiddenConfirm}
-              id={id}
-              changeShow={changeShow}
-            />
+            <DeleteArticle visible={visible} hiddenConfirm={hiddenConfirm} id={id} changeShow={changeShow} />
           </div>
         </div>
       )}

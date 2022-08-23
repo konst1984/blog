@@ -23,9 +23,7 @@ const TagsBlock = ({ regTags }) => {
     setTagArr(tags);
   }, [tags]);
 
-  const tagsList =
-    tagsArr &&
-    tagsArr.map((tag) => <Tag key={tag.id} id={tag.id} text={tag.text} regTags={regTags} />);
+  const tagsList = tagsArr && tagsArr.map((tag) => <Tag key={tag.id} id={tag.id} text={tag.text} regTags={regTags} />);
 
   const ButtonAdd = ({ addTag, style }) => {
     return (

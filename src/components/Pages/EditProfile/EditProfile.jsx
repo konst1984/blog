@@ -44,8 +44,7 @@ const EditProfile = () => {
         placeholder="Avatar image (url)"
         reg={register('image', {
           pattern: {
-            value:
-              /^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i,
+            value: /^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i,
             message: 'Incorrect url',
           },
         })}

@@ -10,8 +10,7 @@ import classes from './ShortArticle.module.scss';
 
 const ShortArticle = (props) => {
   if (props) {
-    const { title, tagList, description, favoritesCount, avatar, author, date, cls, id, children } =
-      props;
+    const { title, tagList, description, favoritesCount, avatar, author, date, cls, id, children } = props;
     return (
       <div className={`${classes.article} ${classes[cls]}`}>
         <div className={classes['article__header']}>

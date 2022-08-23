@@ -30,15 +30,7 @@ const Tag = ({ id, text, regTags }) => {
   return (
     <div id={id} className={classes.tag}>
       <label>
-        <input
-          className={classes.input}
-          type="text"
-          placeholder={'Tag'}
-          defaultValue={text}
-          required
-          {...regTags(id)}
-          onChange={debounceFn}
-        />
+        <input className={classes.input} type="text" placeholder={'Tag'} defaultValue={text} required {...regTags(id)} onChange={debounceFn} />
       </label>
       <ButtonDel id={id} />
     </div>

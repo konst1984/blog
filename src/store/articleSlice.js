@@ -1,151 +1,131 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchShortArticles = createAsyncThunk(
-  'articles/fetchShortArticles',
-  async function (_, { rejectWithValue, getState }) {
-    const url = getState().articles.url;
-    const offsetArticles = getState().articles.offsetArticles;
-    try {
-      const response = await fetch(`${url}/articles/?offset=${offsetArticles}`);
-      if (!response.ok) {
-        throw new Error(`Can not find articles list, request status ${response.statusText}`);
-      }
-      const data = await response.json();
-      return data;
-    } catch (e) {
-      return rejectWithValue(e.message);
+export const fetchShortArticles = createAsyncThunk('articles/fetchShortArticles', async function (_, { rejectWithValue, getState }) {
+  const url = getState().articles.url;
+  const offsetArticles = getState().articles.offsetArticles;
+  try {
+    const response = await fetch(`${url}/articles/?offset=${offsetArticles}`);
+    if (!response.ok) {
+      throw new Error(`Can not find articles list, request status ${response.statusText}`);
     }
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    return rejectWithValue(e.message);
   }
-);
-export const fetchSingleArticle = createAsyncThunk(
-  'articles/fetchSingleArticle',
-  async function (id, { rejectWithValue, getState }) {
-    const url = getState().articles.url;
-    try {
-      const response = await fetch(`${url}/articles/${id}`);
-      if (!response.ok) {
-        throw new Error(
-          `The full version of the article was not found , request status ${response.statusText}`
-        );
-      }
-      const data = await response.json();
-      return data;
-    } catch (e) {
-      return rejectWithValue(e.message);
+});
+export const fetchSingleArticle = createAsyncThunk('articles/fetchSingleArticle', async function (id, { rejectWithValue, getState }) {
+  const url = getState().articles.url;
+  try {
+    const response = await fetch(`${url}/articles/${id}`);
+    if (!response.ok) {
+      throw new Error(`The full version of the article was not found , request status ${response.statusText}`);
     }
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    return rejectWithValue(e.message);
   }
-);
+});
 
-export const deleteArticle = createAsyncThunk(
-  'articles/deleteArticle',
-  async function (id, { rejectWithValue, dispatch, getState }) {
-    const url = getState().articles.url;
-    try {
-      const response = await fetch(`${url}/articles/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
+export const deleteArticle = createAsyncThunk('articles/deleteArticle', async function (id, { rejectWithValue, dispatch, getState }) {
+  const url = getState().articles.url;
+  try {
+    const response = await fetch(`${url}/articles/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Token ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Can not delete article, request status ${response.statusText}`);
+    }
+    dispatch(delFulLArticle());
+  } catch (e) {
+    return rejectWithValue(e.message);
+  }
+});
+
+export const addNewArticle = createAsyncThunk('articles/addNewArticle', async function ({ title, description, body, tagList }, { rejectWithValue, getState }) {
+  const url = getState().articles.url;
+  try {
+    const response = await fetch(`${url}/articles`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        article: {
+          title,
+          description,
+          body,
+          tagList,
         },
-      });
-      if (!response.ok) {
-        throw new Error(`Can not delete article, request status ${response.statusText}`);
-      }
-      dispatch(delFulLArticle());
-    } catch (e) {
-      return rejectWithValue(e.message);
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(`Can not add new article, request status ${response.statusText}`);
     }
-  }
-);
+    const data = await response.json();
 
-export const addNewArticle = createAsyncThunk(
-  'articles/addNewArticle',
-  async function ({ title, description, body, tagList }, { rejectWithValue, getState }) {
-    const url = getState().articles.url;
-    try {
-      const response = await fetch(`${url}/articles`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
+    return data;
+  } catch (e) {
+    return rejectWithValue(e.message);
+  }
+});
+
+export const editArticle = createAsyncThunk('articles/editArticle', async function ({ title, description, body, tagList }, { rejectWithValue, getState }) {
+  const url = getState().articles.url;
+  const slug = getState().articles.fullArticle.slug;
+  try {
+    const response = await fetch(`${url}/articles/${slug}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Token ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        article: {
+          title,
+          description,
+          body,
+          tagList,
         },
-        body: JSON.stringify({
-          article: {
-            title,
-            description,
-            body,
-            tagList,
-          },
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`Can not add new article, request status ${response.statusText}`);
-      }
-      const data = await response.json();
-
-      return data;
-    } catch (e) {
-      return rejectWithValue(e.message);
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(`Can not edit article, request status ${response.statusText}`);
     }
+
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    return rejectWithValue(e.message);
   }
-);
+});
 
-export const editArticle = createAsyncThunk(
-  'articles/editArticle',
-  async function ({ title, description, body, tagList }, { rejectWithValue, getState }) {
-    const url = getState().articles.url;
-    const slug = getState().articles.fullArticle.slug;
-    try {
-      const response = await fetch(`${url}/articles/${slug}`, {
-        method: 'PUT',
-        headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          article: {
-            title,
-            description,
-            body,
-            tagList,
-          },
-        }),
-      });
-      if (!response.ok) {
-        throw new Error(`Can not edit article, request status ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (e) {
-      return rejectWithValue(e.message);
+export const fetchLikeCounts = createAsyncThunk('articles/fetchLikeCounts', async function (slug, { rejectWithValue, getState }) {
+  const url = getState().articles.url;
+  try {
+    const response = await fetch(`${url}/articles/${slug}/favorite`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Can not add like, request status ${response.statusText}`);
     }
-  }
-);
 
-export const fetchLikeCounts = createAsyncThunk(
-  'articles/fetchLikeCounts',
-  async function (slug, { rejectWithValue, getState }) {
-    const url = getState().articles.url;
-    try {
-      const response = await fetch(`${url}/articles/${slug}/favorite`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`Can not add like, request status ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (e) {
-      return rejectWithValue(e.message);
-    }
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    return rejectWithValue(e.message);
   }
-);
+});
 
 const setError = (state, action) => {
   state.status = 'rejected';
@@ -247,14 +227,6 @@ const articleSlice = createSlice({
     [fetchLikeCounts.rejected]: setError,
   },
 });
-export const {
-  switchPage,
-  addNewTag,
-  delFulLArticle,
-  delTag,
-  changeTag,
-  addCurrentTag,
-  showMessage,
-} = articleSlice.actions;
+export const { switchPage, addNewTag, delFulLArticle, delTag, changeTag, addCurrentTag, showMessage } = articleSlice.actions;
 
 export default articleSlice.reducer;

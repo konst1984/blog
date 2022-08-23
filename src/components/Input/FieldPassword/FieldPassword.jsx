@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Input from '../index';
 
 const FieldPassword = ({ reg, err }) => {
@@ -13,9 +14,7 @@ const FieldPassword = ({ reg, err }) => {
       message: 'Your password must not contain more than 40 characters',
     },
   });
-  return (
-    <Input label={'Password'} type={'password'} placeholder={'Password'} reg={register} err={err} />
-  );
+  return <Input label={'Password'} type={'password'} placeholder={'Password'} reg={register} err={err} />;
 };
 
 export default FieldPassword;

@@ -20,10 +20,7 @@ const DeleteArticle = ({ hiddenConfirm, visible, id }) => {
             <p>Are you sure to delete this article?</p>
           </div>
           <div className={classes['confirm-box']}>
-            <button
-              className={`${classes['confirm-answer']} ${classes['confirm-answer_no']}`}
-              onClick={() => hiddenConfirm()}
-            >
+            <button className={`${classes['confirm-answer']} ${classes['confirm-answer_no']}`} onClick={() => hiddenConfirm()}>
               No
             </button>
             <button

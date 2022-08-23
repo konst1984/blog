@@ -17,23 +17,11 @@ const ArticleLayout = ({ titleForm, regTitle, regDescribe, regText, submit, regT
       </label>
       <label>
         Short description
-        <input
-          className={classes.input}
-          type="text"
-          placeholder="Short description"
-          {...regDescribe}
-        />
+        <input className={classes.input} type="text" placeholder="Short description" {...regDescribe} />
       </label>
       <label>
         Text
-        <textarea
-          className={classes.textarea}
-          name={'textarea'}
-          cols="30"
-          rows="10"
-          placeholder="Text"
-          {...regText}
-        />
+        <textarea className={classes.textarea} name={'textarea'} cols="30" rows="10" placeholder="Text" {...regText} />
       </label>
       <TagsBlock regTags={regTags} />
       <SubmitButton name={'Send'} className={classes.submit} />
