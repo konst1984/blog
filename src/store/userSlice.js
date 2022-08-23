@@ -1,6 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// import { articleGenerator, fetchGetRequest } from '../utilites/helpers';
-// import { fetchShortArticles, fetchSingleArticle, removeArticle } from './articleSlice';
 
 export const addNewUserFetch = createAsyncThunk('user/addNewUserFetch', async function ({ username, email, password }, { rejectWithValue, getState }) {
   const url = getState().articles.url;
@@ -53,6 +51,7 @@ export const fetchLogin = createAsyncThunk('user/fetchLogin', async function ({ 
     localStorage.setItem('token', data.user.token);
     localStorage.setItem('user', data.user.username);
     localStorage.setItem('email', data.user.email);
+    localStorage.setItem('avatar', data.user.image);
     dispatch(setLogin());
     return data;
   } catch (e) {
@@ -121,7 +120,7 @@ const userSlice = createSlice({
     login: false,
     bio: '',
     email: '',
-    image: localStorage.getItem('avatar'),
+    image: localStorage.getItem('avatar') || '/images/avatar.svg',
     username: localStorage.getItem('user'),
     status: '',
     error: false,

@@ -23,7 +23,7 @@ const EditProfile = () => {
       username: localStorage.getItem('user') || '',
       email: localStorage.getItem('email') || '',
       password: localStorage.getItem('password') || '',
-      image: localStorage.getItem('avatar') || './images/avatar.svg',
+      image: localStorage.getItem('avatar'),
     },
     mode: 'onBlur',
   });
