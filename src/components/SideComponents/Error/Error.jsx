@@ -1,31 +1,27 @@
 import React, { useEffect, useState } from 'react';
 
 import { Alert } from 'antd';
-import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 import classes from './Error.module.scss';
 
-const Error = ({ link, error, status }) => {
-  // const { status, error } = useSelector((state) => state.articles);
-  // const navigate = useNavigate();
-  // const timer = () => setTimeout(() => navigate(link), 3000);
-  //
-  // useEffect(() => {
-  //   if (status === 'rejected') {
-  //     timer();
-  //   }
-  //   return () => clearTimeout(timer());
-  // }, [status]);
-
+const Error = ({ error, status }) => {
+  const navigate = useNavigate();
   return (
     status === 'rejected' && (
       <>
-        <button>Return back</button>
+        <button className={classes.return} onClick={() => navigate('/article')}>
+          Go back to main page
+        </button>
         <Alert message={error} type="error" className={classes.alert} />
       </>
     )
   );
 };
 
+Error.propTypes = {
+  error: PropTypes.string,
+  status: PropTypes.string,
+};
 export default Error;

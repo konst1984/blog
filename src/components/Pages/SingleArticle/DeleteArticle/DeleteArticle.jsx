@@ -1,5 +1,6 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import { deleteArticle, showMessage } from '../../../../store/articleSlice';
@@ -39,6 +40,12 @@ const DeleteArticle = ({ hiddenConfirm, visible, id }) => {
       )}
     </>
   );
+};
+
+DeleteArticle.propTypes = {
+  id: PropTypes.string,
+  hiddenConfirm: PropTypes.func,
+  visible: PropTypes.bool,
 };
 
 export default DeleteArticle;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 
@@ -47,6 +48,19 @@ const ShortArticle = (props) => {
       </div>
     );
   }
+};
+
+ShortArticle.propTypes = {
+  title: PropTypes.string,
+  favoritesCount: PropTypes.number,
+  tagList: PropTypes.array,
+  description: PropTypes.string,
+  avatar: PropTypes.string,
+  author: PropTypes.string,
+  date: PropTypes.string,
+  id: PropTypes.string,
+  cls: PropTypes.string,
+  children: PropTypes.element,
 };
 
 export default React.memo(ShortArticle);

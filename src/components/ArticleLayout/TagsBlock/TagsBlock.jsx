@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Button } from 'antd';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addNewTag } from '../../../store/articleSlice';
@@ -47,6 +48,10 @@ const TagsBlock = ({ regTags }) => {
       )}
     </div>
   );
+};
+
+TagsBlock.propTypes = {
+  regTags: PropTypes.func,
 };
 
 export default TagsBlock;

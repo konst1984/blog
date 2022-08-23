@@ -2,12 +2,13 @@ import React, { useCallback, useState } from 'react';
 
 import { Button } from 'antd';
 import debounce from 'lodash.debounce';
-
-import classes from '../ArticleLayout.module.scss';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { changeTag, delTag } from '../../../store/articleSlice';
 
-const Tag = ({ id, text, deleteTag, regTags }) => {
+import { changeTag, delTag } from '../../../store/articleSlice';
+import classes from '../ArticleLayout.module.scss';
+
+const Tag = ({ id, text, regTags }) => {
   const dispatch = useDispatch();
 
   const [value, setValue] = useState('');
@@ -17,11 +18,7 @@ const Tag = ({ id, text, deleteTag, regTags }) => {
     dispatch(changeTag({ id, text: e.target.value }));
   };
 
-  // const changeValue = (e) => {
-  //   setValue(e.target.value);
-  //   changeTag(e, e.target.value, id);
-  // };
-  const ButtonDel = ({ deleteTag, id }) => {
+  const ButtonDel = ({ id }) => {
     const dispatch = useDispatch();
     return (
       <Button danger onClick={() => dispatch(delTag(id))}>
@@ -43,9 +40,14 @@ const Tag = ({ id, text, deleteTag, regTags }) => {
           onChange={debounceFn}
         />
       </label>
-      <ButtonDel id={id} deleteTag={deleteTag} />
+      <ButtonDel id={id} />
     </div>
   );
 };
 
+Tag.propTypes = {
+  id: PropTypes.number,
+  text: PropTypes.string,
+  regTags: PropTypes.func,
+};
 export default React.memo(Tag);

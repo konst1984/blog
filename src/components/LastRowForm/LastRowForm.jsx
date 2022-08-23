@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import classes from './LastRowForm.module.scss';
@@ -12,5 +13,11 @@ const LastRowForm = memo(({ text, link, nameLink }) => {
     </div>
   );
 });
+
+LastRowForm.propTypes = {
+  text: PropTypes.string,
+  link: PropTypes.string,
+  nameLink: PropTypes.string,
+};
 
 export default LastRowForm;

@@ -1,4 +1,7 @@
 import React from 'react';
+
+import PropTypes from 'prop-types';
+
 import Input from '../index';
 
 const FieldEmail = ({ reg, err }) => {
@@ -11,7 +14,12 @@ const FieldEmail = ({ reg, err }) => {
     },
   });
 
-  return <Input label={'Username'} placeholder={'Username'} reg={register} err={err} />;
+  return <Input label={'Email address'} placeholder={'Email address'} reg={register} err={err} />;
+};
+
+FieldEmail.propTypes = {
+  err: PropTypes.object,
+  reg: PropTypes.func,
 };
 
 export default FieldEmail;

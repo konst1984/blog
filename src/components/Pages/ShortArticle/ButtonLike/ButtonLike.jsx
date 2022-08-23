@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchLikeCounts } from '../../../../store/articleSlice';
@@ -36,6 +37,11 @@ const ButtonLike = ({ favoritesCount, id }) => {
       {like}
     </span>
   );
+};
+
+ButtonLike.propTypes = {
+  favoritesCount: PropTypes.number,
+  id: PropTypes.string,
 };
 
 export default ButtonLike;

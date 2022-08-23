@@ -28,7 +28,7 @@ const HeaderButton = () => {
 
   const logOut = () => {
     dispatch(setLogout());
-    localStorage.removeItem('token');
+    localStorage.clear();
   };
   return (
     <>

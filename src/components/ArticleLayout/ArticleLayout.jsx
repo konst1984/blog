@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import SubmitButton from '../SubmitButton';
 
 import classes from './ArticleLayout.module.scss';
@@ -37,6 +39,20 @@ const ArticleLayout = ({ titleForm, regTitle, regDescribe, regText, submit, regT
       <SubmitButton name={'Send'} className={classes.submit} />
     </form>
   );
+};
+
+ArticleLayout.defaultProps = {
+  regTags: () => {},
+  submit: () => {},
+};
+
+ArticleLayout.propTypes = {
+  regTags: PropTypes.func,
+  regTitle: PropTypes.object,
+  titleForm: PropTypes.string,
+  regDescribe: PropTypes.object,
+  regText: PropTypes.object,
+  submit: PropTypes.func,
 };
 
 export default ArticleLayout;

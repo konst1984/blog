@@ -146,7 +146,7 @@ const userSlice = createSlice({
     setLogout(state) {
       state.login = false;
       state.email = '';
-      state.image = './images/avatar.svg';
+      state.image = '';
       state.username = '';
       state.bio = '';
     },

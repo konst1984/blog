@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import clazz from '../CreateAccount.module.scss';
 
 const Checkbox = ({ reg, err }) => {
@@ -14,6 +16,11 @@ const Checkbox = ({ reg, err }) => {
       )}
     </label>
   );
+};
+
+Checkbox.propTypes = {
+  err: PropTypes.object,
+  reg: PropTypes.object,
 };
 
 export default Checkbox;

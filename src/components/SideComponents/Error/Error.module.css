@@ -5,4 +5,16 @@
   overflow: hidden;
 }
 
+.return {
+  border-radius: 10px;
+}
+.return:hover {
+  background: #096dd9;
+  color: white;
+}
+.return:active {
+  background: white;
+  color: #096dd9;
+}
+
 /*# sourceMappingURL=Error.module.css.map */

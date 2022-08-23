@@ -1,5 +1,9 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
+import Error from '../SideComponents/Error';
+
 import classes from './TextArea.module.scss';
 
 const TextArea = ({ label, value }) => {
@@ -11,4 +15,8 @@ const TextArea = ({ label, value }) => {
   );
 };
 
+Error.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+};
 export default TextArea;

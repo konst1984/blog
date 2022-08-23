@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
 import { Button } from 'antd';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -44,6 +45,11 @@ const ActionButtons = ({ id, changeShow }) => {
       )}
     </>
   );
+};
+
+ActionButtons.propTypes = {
+  id: PropTypes.string,
+  changeShow: PropTypes.func,
 };
 
 export default ActionButtons;

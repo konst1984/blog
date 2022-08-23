@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,4 +42,9 @@ const EventMessage = ({ text, eventMessage, link }) => {
   ) : null;
 };
 
+EventMessage.propTypes = {
+  text: PropTypes.string,
+  link: PropTypes.string,
+  eventMessage: PropTypes.bool,
+};
 export default EventMessage;
