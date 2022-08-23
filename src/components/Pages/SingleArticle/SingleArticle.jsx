@@ -33,7 +33,7 @@ const SingleArticle = () => {
       <div className={classes['full-article']}>
         <ShortArticle
           cls="non-filter"
-          id={''}
+          id={id}
           title={transformArticle.title}
           tagList={transformArticle.tagList}
           description={transformArticle.description}

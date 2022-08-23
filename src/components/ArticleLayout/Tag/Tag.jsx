@@ -26,7 +26,7 @@ const Tag = ({ id, text, regTags }) => {
       </Button>
     );
   };
-  const debounceFn = useCallback(debounce(changeValue, 500), [value]);
+  const debounceFn = useCallback(debounce(changeValue, 300), [value]);
   return (
     <div id={id} className={classes.tag}>
       <label>

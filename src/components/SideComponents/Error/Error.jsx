@@ -2,17 +2,23 @@ import React, { useEffect, useState } from 'react';
 
 import { Alert } from 'antd';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 
 import classes from './Error.module.scss';
 
 const Error = ({ error, status }) => {
-  const navigate = useNavigate();
+  const refreshPage = () => {
+    window.location.reload();
+  };
   return (
     status === 'rejected' && (
       <>
-        <button className={classes.return} onClick={() => navigate('/article')}>
-          Go back to main page
+        <button
+          className={classes.return}
+          onClick={() => {
+            refreshPage();
+          }}
+        >
+          Go back to page
         </button>
         <Alert message={error} type="error" className={classes.alert} />
       </>

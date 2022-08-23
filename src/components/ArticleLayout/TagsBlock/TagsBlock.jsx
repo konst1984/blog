@@ -25,7 +25,7 @@ const TagsBlock = ({ regTags }) => {
 
   const tagsList = tagsArr && tagsArr.map((tag) => <Tag key={tag.id} id={tag.id} text={tag.text} regTags={regTags} />);
 
-  const ButtonAdd = ({ addTag, style }) => {
+  const ButtonAdd = ({ style }) => {
     return (
       <Button type="primary" ghost onClick={handleAddTag} style={style}>
         Add tag
