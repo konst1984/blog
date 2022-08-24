@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import classes from '../../../index.module.scss';
 import { fetchLogin } from '../../../store/userSlice';
-import FieldEmail from '../../Input/FieldEmail';
-import FieldPassword from '../../Input/FieldPassword';
+import Error from '../../Error';
+import FieldEmail from '../../FieldEmail';
+import FieldPassword from '../../FieldPassword';
 import LastRowForm from '../../LastRowForm';
-import Error from '../../SideComponents/Error';
 import SubmitButton from '../../SubmitButton';
 
 const LoginPage = () => {

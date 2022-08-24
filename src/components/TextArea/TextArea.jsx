@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import Error from '../SideComponents/Error';
+import Error from '../Error';
 
 import classes from './TextArea.module.scss';
 

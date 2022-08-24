@@ -28,7 +28,7 @@
     },
     "plugins": ["react","import","prettier"],
     "rules": {
-      "max-len": ["error", { "code": 170 }],
+      "max-len": ["error", { "code": 120 }],
       "react/display-name": "off",
       "indent": ["error", 2,{ "SwitchCase": 1 }],
       "prettier/prettier": "error",

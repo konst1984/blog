@@ -2,8 +2,9 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
+import SignInOutBlock from '../SignInOutBlock/SignInOutBlock';
+
 import classes from './Header.module.scss';
-import SignInOut from './SignInOut/SignInOut';
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
       <div className={classes.title}>
         <Link to="articles">Realworld Blog</Link>
       </div>
-      <SignInOut />
+      <SignInOutBlock />
     </div>
   );
 };

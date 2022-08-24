@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import classes from '../../../index.module.scss';
 import { editProfile } from '../../../store/userSlice';
+import FieldEmail from '../../FieldEmail';
+import FieldName from '../../FieldName';
+import FieldPassword from '../../FieldPassword';
 import Input from '../../Input';
-import FieldEmail from '../../Input/FieldEmail';
-import FieldName from '../../Input/FieldName';
-import FieldPassword from '../../Input/FieldPassword';
 import SubmitButton from '../../SubmitButton';
 
 const EditProfile = () => {
@@ -44,7 +44,8 @@ const EditProfile = () => {
         placeholder="Avatar image (url)"
         reg={register('image', {
           pattern: {
-            value: /^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i,
+            value:
+              /^(http|https|ftp):\/\/(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)(:(\d+))?\/?/i,
             message: 'Incorrect url',
           },
         })}

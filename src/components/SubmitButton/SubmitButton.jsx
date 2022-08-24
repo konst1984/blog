@@ -1,10 +1,9 @@
 import React, { memo } from 'react';
 
-import 'antd/dist/antd.css';
 import { Button } from 'antd';
 import PropTypes from 'prop-types';
 
-import Error from '../SideComponents/Error';
+import Error from '../Error';
 
 import classes from './SubmitButton.module.scss';
 

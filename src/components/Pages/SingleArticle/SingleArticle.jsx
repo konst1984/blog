@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import ReactMarkdown from 'react-markdown';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,11 +6,11 @@ import { useParams } from 'react-router-dom';
 
 import { fetchSingleArticle } from '../../../store/articleSlice';
 import { articleGenerator } from '../../../utilites/helpers';
-import EventMessage from '../../SideComponents/EventMessage';
-import LoadErrorHandler from '../../SideComponents/LoadErrorComponent';
+import DelEditButtons from '../../DelEditButtons';
+import EventMessage from '../../EventMessage';
+import LoadErrorHandler from '../../LoadErrorComponent';
 import ShortArticle from '../ShortArticle';
 
-import ActionButtons from './ActionButtons';
 import classes from './SingleArticle.module.scss';
 
 const SingleArticle = () => {
@@ -42,7 +42,7 @@ const SingleArticle = () => {
           author={transformArticle.author}
           updatedAt={transformArticle.updatedAt}
         >
-          <ActionButtons id={id} />
+          <DelEditButtons id={id} />
         </ShortArticle>
         <div className={classes['article-body']}>
           <ReactMarkdown>{transformArticle.body}</ReactMarkdown>

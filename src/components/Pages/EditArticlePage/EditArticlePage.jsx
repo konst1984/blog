@@ -4,13 +4,15 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { addCurrentTag, editArticle } from '../../../store/articleSlice';
+import { addCurrentTag, editArticle, showMessage } from '../../../store/articleSlice';
 import { tagsCreator } from '../../../utilites/helpers';
 import ArticleLayout from '../../ArticleLayout';
+import EventMessage from '../../EventMessage';
+import LoadErrorHandler from '../../LoadErrorComponent';
 
 const EditArticlePage = () => {
   const { id } = useParams();
-  const { fullArticle } = useSelector((state) => state.articles);
+  const { fullArticle, eventMessage, status, error } = useSelector((state) => state.articles);
 
   const { tags } = useSelector((state) => state.articles);
   const dispatch = useDispatch();
@@ -34,10 +36,22 @@ const EditArticlePage = () => {
   const onSubmitForm = (data) => {
     const obj = { ...data, tagList };
     dispatch(editArticle(obj));
+    dispatch(showMessage(true));
     reset();
   };
-
-  return (
+  console.log(eventMessage);
+  console.log(status);
+  console.log(!fullArticle);
+  if (status === 'rejected') {
+    return <LoadErrorHandler link={'/new-article'} status={status} error={error} />;
+  }
+  return eventMessage && status === 'loading' ? (
+    <EventMessage
+      text={'Your article has been edited'}
+      eventMessage={eventMessage}
+      link={'/article'}
+    />
+  ) : (
     <ArticleLayout
       regTitle={register('title', {
         required: true,

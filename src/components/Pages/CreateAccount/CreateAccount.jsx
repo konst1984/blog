@@ -5,15 +5,14 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import classes from '../../../index.module.scss';
-import { addNewUserFetch, setLogin } from '../../../store/userSlice';
+import { addNewUserFetch } from '../../../store/userSlice';
+import Checkbox from '../../Checkbox';
+import FieldEmail from '../../FieldEmail';
+import FieldName from '../../FieldName';
+import FieldPassword from '../../FieldPassword';
 import Input from '../../Input';
-import FieldEmail from '../../Input/FieldEmail';
-import FieldName from '../../Input/FieldName';
-import FieldPassword from '../../Input/FieldPassword';
 import LastRowForm from '../../LastRowForm';
 import SubmitButton from '../../SubmitButton';
-
-import Checkbox from './Checkbox';
 
 const CreateAccount = () => {
   const {

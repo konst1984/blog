@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchShortArticles } from '../../store/articleSlice';
 import { articleGenerator } from '../../utilites/helpers';
 import ArticlesPagination from '../ArticlesPagination';
+import LoadErrorHandler from '../LoadErrorComponent';
 import ShortArticle from '../Pages/ShortArticle';
-import LoadErrorHandler from '../SideComponents/LoadErrorComponent';
 
 import classes from './ArticleList.module.scss';
 

@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addCurrentTag, addNewArticle, showMessage } from '../../../store/articleSlice';
 import ArticleLayout from '../../ArticleLayout';
-import EventMessage from '../../SideComponents/EventMessage';
-import LoadErrorHandler from '../../SideComponents/LoadErrorComponent';
+import EventMessage from '../../EventMessage';
+import LoadErrorHandler from '../../LoadErrorComponent';
 
 const CreateArticle = () => {
   const { tags, eventMessage, status, error, fullArticle } = useSelector((state) => state.articles);
@@ -31,7 +31,11 @@ const CreateArticle = () => {
     return <LoadErrorHandler link={'/new-article'} status={status} error={error} />;
   }
   return eventMessage && status === 'fulfilled' && !fullArticle ? (
-    <EventMessage text={'Your article has been published'} eventMessage={eventMessage} link={'/article'} />
+    <EventMessage
+      text={'Your article has been published'}
+      eventMessage={eventMessage}
+      link={'/article'}
+    />
   ) : (
     <ArticleLayout
       titleForm={'Create new article'}
