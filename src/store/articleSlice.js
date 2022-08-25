@@ -170,6 +170,7 @@ const articleSlice = createSlice({
     fullArticle: null,
     tags: [],
     eventMessage: false,
+    author: '',
   },
   reducers: {
     switchPage(state, action) {
@@ -221,6 +222,7 @@ const articleSlice = createSlice({
       state.fullArticle = action.payload.article;
       state.tags = action.payload.article.tagList || [];
       state.status = 'fulfilled';
+      state.author = action.payload.article.author.username;
       state.error = false;
     },
     [fetchSingleArticle.rejected]: setError,

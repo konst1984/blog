@@ -1,2 +1,1 @@
-import LoadErrorHandler from './LoadErrorComponent';
-export default LoadErrorHandler;
+export { default as LoadErrorComponent } from './LoadErrorComponent';

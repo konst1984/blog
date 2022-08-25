@@ -1,2 +1,1 @@
-import EventMessage from './EventMessage';
-export default EventMessage;
+export { default as EventMessage } from './EventMessage';

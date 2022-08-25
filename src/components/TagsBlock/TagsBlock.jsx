@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addNewTag } from '../../store/articleSlice';
-import { tagsCreator } from '../../utilites/helpers';
+import { tagsCreator } from '../../utils/helpers';
 import classes from '../ArticleLayout/ArticleLayout.module.scss';
-import Tag from '../Tag';
+import { Tag } from '../Tag';
 
 const TagsBlock = ({ regTags }) => {
   const { tags } = useSelector((state) => state.articles);

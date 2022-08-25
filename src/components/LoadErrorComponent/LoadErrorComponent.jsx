@@ -2,8 +2,8 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import Error from '../Error';
-import Preloader from '../Preloader';
+import { Error } from '../Error';
+import { Preloader } from '../Preloader';
 
 const LoadErrorComponent = ({ link, status, error }) => {
   return (

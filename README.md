@@ -1,3 +1,3 @@
 # Blogging platform -React project
 
-link: https://blogging-platform-dgwfncu0a-konst1984.vercel.app/
+link: https://blogging-platform-guy31mxu5-konst1984.vercel.app/articles

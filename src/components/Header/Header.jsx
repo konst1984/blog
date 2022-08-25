@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import SignInOutBlock from '../SignInOutBlock/SignInOutBlock';
+import { SignInOutBlock } from '../SignInOutBlock';
 
 import classes from './Header.module.scss';
 

@@ -1,2 +1,1 @@
-import EditArticlePage from './EditArticlePage';
-export default EditArticlePage;
+export { default as EditArticlePage } from './EditArticlePage';

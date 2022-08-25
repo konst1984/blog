@@ -1,2 +1,1 @@
-import HeaderButton from './HeaderButton';
-export default HeaderButton;
+export { default as HeaderButton } from './HeaderButton';

@@ -1,3 +1,1 @@
-import DeleteArticleMessage from './DeleteArticleMessage';
-
-export default DeleteArticleMessage;
+export { default as DeleteArticleMessage } from './DeleteArticleMessage';

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 
-import ButtonLike from '../../ButtonLike';
+import { ButtonLike } from '../../ButtonLike';
 
 import classes from './ShortArticle.module.scss';
 

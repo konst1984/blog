@@ -1,28 +1,30 @@
 import React, { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
-import { Routes, Route, Link, Outlet } from 'react-router-dom';
+import { Routes, Route, Link, Outlet, useNavigate } from 'react-router-dom';
 
 import classes from './App.module.scss';
-import ArticleList from './components/ArticleList';
-import Header from './components/Header';
-import { LoginAuth, ProfileAuth } from './components/hoc/LoginAuth';
-import { RequiredAuthorization } from './components/hoc/RequiredAuthorization';
-import CreateAccount from './components/Pages/CreateAccount';
-import CreateArticle from './components/Pages/CreateArticle';
-import EditArticlePage from './components/Pages/EditArticlePage';
-import EditProfile from './components/Pages/EditProfile';
-import LoginPage from './components/Pages/LoginPage';
-import SingleArticle from './components/Pages/SingleArticle';
+import { ArticleList } from './components/ArticleList';
+import { Header } from './components/Header';
+import { CreateAccount } from './components/Pages/CreateAccount';
+import { CreateArticle } from './components/Pages/CreateArticle';
+import { EditArticlePage } from './components/Pages/EditArticlePage';
+import { EditProfile } from './components/Pages/EditProfile';
+import { LoginPage } from './components/Pages/LoginPage';
+import { SingleArticle } from './components/Pages/SingleArticle';
+import { LoginAuth, ProfileAuth } from './hoc/LoginAuth';
+import { RequiredAuthorization } from './hoc/RequiredAuthorization';
 import { setLogin } from './store/userSlice';
 
 function App() {
   const dispatch = useDispatch();
+  const navigator = useNavigate();
   useEffect(() => {
     const loggedInUser = localStorage.getItem('token');
     if (loggedInUser) {
       dispatch(setLogin());
     }
+    navigator('articles');
   }, []);
   return (
     <div className={classes.App}>
@@ -62,7 +64,6 @@ function App() {
               </LoginAuth>
             }
           />
-          {/*<Route path="sign-in" element={<LoginPage />} />*/}
           <Route path="sign-up" element={<CreateAccount />} />
           <Route path="*" element={<ArticleList />} />
         </Route>
@@ -78,7 +79,6 @@ const Layout = () => {
       <div className={classes.main}>
         <Outlet />
       </div>
-      {/*<ArticlesPagination />*/}
     </>
   );
 };

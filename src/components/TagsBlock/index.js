@@ -1,3 +1,1 @@
-import TagsBlock from './TagsBlock';
-
-export default TagsBlock;
+export { default as TagsBlock } from './TagsBlock';

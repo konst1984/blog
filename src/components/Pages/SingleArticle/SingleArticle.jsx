@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { fetchSingleArticle } from '../../../store/articleSlice';
-import { articleGenerator } from '../../../utilites/helpers';
-import DelEditButtons from '../../DelEditButtons';
-import EventMessage from '../../EventMessage';
-import LoadErrorHandler from '../../LoadErrorComponent';
-import ShortArticle from '../ShortArticle';
+import { articleGenerator } from '../../../utils/helpers';
+import { DelEditButtons } from '../../DelEditButtons';
+import { EventMessage } from '../../EventMessage';
+import { LoadErrorComponent } from '../../LoadErrorComponent';
+import { ShortArticle } from '../ShortArticle';
 
 import classes from './SingleArticle.module.scss';
 
@@ -27,7 +27,7 @@ const SingleArticle = () => {
 
   const transformArticle = fullArticle && articleGenerator(fullArticle);
   return status === 'rejected' ? (
-    <LoadErrorHandler link={'/article'} status={status} error={error} />
+    <LoadErrorComponent link={'/article'} status={status} error={error} />
   ) : (
     (transformArticle && (
       <div className={classes['full-article']}>

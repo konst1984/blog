@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { addCurrentTag, editArticle, showMessage } from '../../../store/articleSlice';
-import { tagsCreator } from '../../../utilites/helpers';
-import ArticleLayout from '../../ArticleLayout';
-import EventMessage from '../../EventMessage';
-import LoadErrorHandler from '../../LoadErrorComponent';
+import { tagsCreator } from '../../../utils/helpers';
+import { ArticleLayout } from '../../ArticleLayout';
+import { EventMessage } from '../../EventMessage';
+import { LoadErrorComponent } from '../../LoadErrorComponent';
 
 const EditArticlePage = () => {
   const { id } = useParams();
@@ -41,14 +41,10 @@ const EditArticlePage = () => {
   };
 
   if (status === 'rejected') {
-    return <LoadErrorHandler link={'/articles'} status={status} error={error} />;
+    return <LoadErrorComponent link="/articles" status={status} error={error} />;
   }
   return eventMessage && status === 'fulfilled' ? (
-    <EventMessage
-      text={'Your article has been edited'}
-      eventMessage={eventMessage}
-      link={'/article'}
-    />
+    <EventMessage text="Your article has been edited" eventMessage={eventMessage} link="/article" />
   ) : (
     <ArticleLayout
       regTitle={register('title', {
@@ -61,7 +57,7 @@ const EditArticlePage = () => {
         required: true,
       })}
       regTags={(id) => register(`Tag${id}`)}
-      titleForm={'Edit article'}
+      titleForm="Edit article"
       submit={handleSubmit(onSubmitForm)}
     />
   );

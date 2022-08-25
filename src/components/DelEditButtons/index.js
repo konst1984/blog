@@ -1,2 +1,1 @@
-import DelEditButtons from './DelEditButtons';
-export default DelEditButtons;
+export { default as DelEditButtons } from './DelEditButtons';

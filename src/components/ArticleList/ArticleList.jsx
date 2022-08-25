@@ -3,10 +3,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchShortArticles } from '../../store/articleSlice';
-import { articleGenerator } from '../../utilites/helpers';
-import ArticlesPagination from '../ArticlesPagination';
-import LoadErrorHandler from '../LoadErrorComponent';
-import ShortArticle from '../Pages/ShortArticle';
+import { articleGenerator } from '../../utils/helpers';
+import { ArticlesPagination } from '../ArticlesPagination';
+import { LoadErrorComponent } from '../LoadErrorComponent';
+import { ShortArticle } from '../Pages/ShortArticle';
 
 import classes from './ArticleList.module.scss';
 
@@ -27,7 +27,7 @@ const ArticleList = () => {
   return (
     <>
       <div style={{ height: '32px' }}>
-        <LoadErrorHandler />
+        <LoadErrorComponent />
       </div>
       <div className={classes['articles-list']}>{articles ? transformArticles : null}</div>
       <ArticlesPagination />

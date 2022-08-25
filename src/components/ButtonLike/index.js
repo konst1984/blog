@@ -1,2 +1,1 @@
-import ButtonLike from './ButtonLike';
-export default ButtonLike;
+export { default as ButtonLike } from './ButtonLike';

@@ -1,2 +1,1 @@
-import CreateArticle from './CreateArticle';
-export default CreateArticle;
+export { default as CreateArticle } from './CreateArticle';

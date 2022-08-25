@@ -1,3 +1,1 @@
-import LastRowForm from './LastRowForm';
-
-export default LastRowForm;
+export { default as LastRowForm } from './LastRowForm';

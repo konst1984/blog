@@ -1,3 +1,1 @@
-import SignInOutBlock from './SignInOutBlock';
-
-export default SignInOutBlock;
+export { default as SignInOutBlock } from './SignInOutBlock';

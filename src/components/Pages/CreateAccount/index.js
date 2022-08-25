@@ -1,3 +1,1 @@
-import CreateAccount from './CreateAccount';
-
-export default CreateAccount;
+export { default as CreateAccount } from './CreateAccount';

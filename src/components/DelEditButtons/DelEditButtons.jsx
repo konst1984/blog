@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import DeleteArticleMessage from '../DeleteArticleMessage';
+import { DeleteArticleMessage } from '../DeleteArticleMessage';
 import classes from '../Pages/SingleArticle/SingleArticle.module.scss';
 
 const DelEditButtons = ({ id, changeShow }) => {
-  const { login } = useSelector((state) => state.user);
+  const { login, username } = useSelector((state) => state.user);
+  const { author } = useSelector((state) => state.articles);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     if (visible) {
@@ -25,7 +26,7 @@ const DelEditButtons = ({ id, changeShow }) => {
   };
   return (
     <>
-      {login && (
+      {login && author === username ? (
         <div className={classes.buttons}>
           <div className={classes['buttons__wrapper']}>
             <Button danger className={classes['del-article']} onClick={() => showConfirm()}>
@@ -42,7 +43,7 @@ const DelEditButtons = ({ id, changeShow }) => {
             />
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 };

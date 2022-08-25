@@ -2,8 +2,8 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import SubmitButton from '../SubmitButton';
-import TagsBlock from '../TagsBlock';
+import { SubmitButton } from '../SubmitButton';
+import { TagsBlock } from '../TagsBlock';
 
 import classes from './ArticleLayout.module.scss';
 

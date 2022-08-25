@@ -1,5 +1,5 @@
 {
-  "name": "aviasales-react",
+  "name": "blog-react",
   "version": "0.1.0",
   "private": true,
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
@@ -7,7 +7,7 @@
   "author": "",
   "main": "index.js",
   "binary": {
-    "module_name": "aviasales",
+    "module_name": "Blog",
     "module_path": "./build"
   },
   "scripts": {

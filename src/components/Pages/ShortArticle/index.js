@@ -1,3 +1,1 @@
-import ShortArticle from './ShortArticle';
-
-export default ShortArticle;
+export { default as ShortArticle } from './ShortArticle';

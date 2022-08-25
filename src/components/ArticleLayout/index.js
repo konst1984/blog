@@ -1,3 +1,1 @@
-import ArticleLayout from './ArticleLayout';
-
-export default ArticleLayout;
+export { default as ArticleLayout } from './ArticleLayout';

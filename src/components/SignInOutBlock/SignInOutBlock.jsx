@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import classes from '../Header/Header.module.scss';
-import HeaderButton from '../HeaderButton';
+import { HeaderButton } from '../HeaderButton';
 
 const SignInOutBlock = () => {
   const login = useSelector((state) => state.user.login);
