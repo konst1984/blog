@@ -238,6 +238,10 @@ const articleSlice = createSlice({
       state.error = false;
     },
     [editArticle.pending]: pending,
+    [editArticle.fulfilled]: (state) => {
+      state.status = 'fulfilled';
+      state.error = false;
+    },
     [editArticle.rejected]: setError,
     [fetchLikeCounts.pending]: pending,
     [fetchLikeCounts.fulfilled]: (state) => {

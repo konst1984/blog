@@ -39,13 +39,11 @@ const EditArticlePage = () => {
     dispatch(showMessage(true));
     reset();
   };
-  console.log(eventMessage);
-  console.log(status);
-  console.log(!fullArticle);
+
   if (status === 'rejected') {
-    return <LoadErrorHandler link={'/new-article'} status={status} error={error} />;
+    return <LoadErrorHandler link={'/articles'} status={status} error={error} />;
   }
-  return eventMessage && status === 'loading' ? (
+  return eventMessage && status === 'fulfilled' ? (
     <EventMessage
       text={'Your article has been edited'}
       eventMessage={eventMessage}
