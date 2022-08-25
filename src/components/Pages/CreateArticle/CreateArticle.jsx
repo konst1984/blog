@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { addCurrentTag, addNewArticle, showMessage } from '../../../store/articleSlice';
 import { ArticleLayout } from '../../ArticleLayout';
@@ -10,6 +11,7 @@ import { LoadErrorComponent } from '../../LoadErrorComponent';
 
 const CreateArticle = () => {
   const { tags, eventMessage, status, error, fullArticle } = useSelector((state) => state.articles);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,14 +30,14 @@ const CreateArticle = () => {
   };
 
   if (status === 'rejected') {
-    return <LoadErrorComponent link={'/new-article'} status={status} error={error} />;
+    return <LoadErrorComponent link={'new-article'} status={status} error={error} />;
   }
 
-  return eventMessage && status === 'fulfilled' && !fullArticle ? (
+  return eventMessage && status === 'fulfilled' ? (
     <EventMessage
       text={'Your article has been published'}
       eventMessage={eventMessage}
-      link={'/article'}
+      link={'article'}
     />
   ) : (
     <ArticleLayout

@@ -155,6 +155,10 @@ const pending = (state) => {
   state.status = 'loading';
   state.error = false;
 };
+const fulfilled = (state) => {
+  state.status = 'fulfilled';
+  state.error = false;
+};
 
 const articleSlice = createSlice({
   name: 'articles',
@@ -227,29 +231,19 @@ const articleSlice = createSlice({
     },
     [fetchSingleArticle.rejected]: setError,
     [deleteArticle.pending]: pending,
-    [deleteArticle.fulfilled]: (state) => {
-      state.status = 'fulfilled';
-      state.error = false;
-    },
+    [deleteArticle.fulfilled]: fulfilled,
     [deleteArticle.rejected]: setError,
     [addNewArticle.pending]: pending,
-    [addNewArticle.rejected]: setError,
     [addNewArticle.fulfilled]: (state) => {
-      state.tags = [];
       state.status = 'fulfilled';
       state.error = false;
     },
+    [addNewArticle.rejected]: setError,
     [editArticle.pending]: pending,
-    [editArticle.fulfilled]: (state) => {
-      state.status = 'fulfilled';
-      state.error = false;
-    },
+    [editArticle.fulfilled]: fulfilled,
     [editArticle.rejected]: setError,
     [fetchLikeCounts.pending]: pending,
-    [fetchLikeCounts.fulfilled]: (state) => {
-      state.status = 'fulfilled';
-      state.error = false;
-    },
+    [fetchLikeCounts.fulfilled]: fulfilled,
     [fetchLikeCounts.rejected]: setError,
   },
 });
